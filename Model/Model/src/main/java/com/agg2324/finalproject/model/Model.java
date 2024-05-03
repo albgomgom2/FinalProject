@@ -38,13 +38,13 @@ public class Model {
       return false;
     } */
 
-    /*public List<String> dataStudents(){
+    /*public List<String> dataStudents(String user, String password, String nombre){
         try(Session session = sessionfactory.openSession()){
-            Query<AlumnosEntity> alumnosQuery = session.creteQuery("from com.agg2324.finalproject.model.pojos.alumnosEntity where user like '"+user+"' and password like '"+password+"'");
+            Query<AlumnosEntity> alumnosQuery = session.creteQuery("from com.agg2324.finalproject.model.pojos.AlumnosEntity where user like '"+user+"' and password like '"+password+"'");
             List<AlunmosEntity> alunmos = alumnosQuery.list();
             List<String> listalumnos = new ArrayList<>();
             for(AlumnosEntity entity : alumnos){
-                listalumnos.add(entity.getDni() + "  " + entity.getNombre + "  " + entity.getApellidos + "  " + entity.getEdad() + "  " + entity.getDireccion() + "  " + entity.getPais() + "  " + entity.getLocalidad() + "  " + entity.getCiudad() + "  " + entity.getFoto() + "  " + entity.);
+                listalumnos.add(entity.getDni() + "  " + entity.getNombre + "  " + entity.getApellidos + "  " + entity.getEdad() + "  " + entity.getTelefono() + "  " + entity.getDireccion() + "  " + entity.getPais() + "  " + entity.getLocalidad() + "  " + entity.getCiudad() + "  " + entity.getFoto() + "  " + entity.getIdCurso() + "  " + entity.getUsuario() + "  " + entity.getContraseña());
             }
             return listalumnos;
         }catch(Exception e){
@@ -53,6 +53,49 @@ public class Model {
         return null;
     }
 
+    public void cmbListCursos(List<String> cursos){
+        try(Session session = sessionfactory.openSession()){
+            Query<CursoEntity> cursosQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.CursoEntity");
+            List<CursoEntity> cursoEntity = cursosQuery.list();
+            for(CursoEntity curso : cursoEntity){
+                cursoEntity.add(curso.getNombre());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String idCurso(String nombre){
+        try(Session session = sessionfactory.openSession()){
+            Query<CursoEntity> cursoQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.CursoEntity Nombre like '"+nombre+"'");
+            List<CursoEntity> curso = cursoQuery.list();
+            return curso.getId();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public boolean ckeckMatricula(String dni, String nombre){
+        try(Session session = sessionfactory.openSession()){
+            Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.MatriculaEntity dni = '"+dni+"' and tipo = 'Aprobado' and idCurso = '"+idCurso(nombre)+"'");
+            List<MatriculaEntity> matricula = matriculaQuery.list();
+            return matricula.isEmpty();
+        }catch(Exception e){
+            System.out.printl(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean ckeckMatriculasCursadas(String Dni){
+        try(Session session = sessionfactory.openSession()){
+            Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.MatriculaEntity dni = '"+dni+"' and tipo = 'Cursando'");
+            List<MatriculaEntity> matricula = matriculaQuery.list();
+            return matricula.isEmpty();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
      */
 
