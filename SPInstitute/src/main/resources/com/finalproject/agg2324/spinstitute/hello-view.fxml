@@ -115,7 +115,7 @@
             <Button fx:id="btnSalir" mnemonicParsing="false" prefHeight="45.0" prefWidth="84.0" text="SALIR" GridPane.columnIndex="5" />
          </children>
       </GridPane>
-      <GridPane fx:id="grpVentanaBienvenida" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
+      <GridPane fx:id="grpVentanaBienvenida" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -129,6 +129,197 @@
                </font>
             </Label>
          </children>
+      </GridPane>
+      <GridPane fx:id="grpVentanaMatricula" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ComboBox fx:id="cmbCursos" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="15.0" top="30.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="Cursos: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="15.0" top="35.0" />
+               </GridPane.margin>
+            </Label>
+            <RadioButton fx:id="rbtnMañana" disable="true" mnemonicParsing="false" text="Mañana" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="80.0" top="110.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <Label text="Turno: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="100.0" top="80.0" />
+               </GridPane.margin>
+            </Label>
+            <RadioButton fx:id="rbtnTarde" disable="true" layoutX="26.0" layoutY="111.0" mnemonicParsing="false" text="Tarde">
+               <GridPane.margin>
+                  <Insets bottom="40.0" left="80.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <Label layoutX="41.0" layoutY="91.0" text="Nivel: " GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="100.0" top="80.0" />
+               </GridPane.margin>
+            </Label>
+            <RadioButton fx:id="rbtnPrimero" disable="true" layoutX="26.0" layoutY="121.0" mnemonicParsing="false" text="Primero" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="86.0" top="110.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <RadioButton fx:id="rbtnSegundo" disable="true" layoutX="339.0" layoutY="121.0" mnemonicParsing="false" text="Segundo" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets bottom="40.0" right="80.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <Label layoutX="111.0" layoutY="91.0" text="Repetidor: ">
+               <GridPane.margin>
+                  <Insets left="100.0" top="50.0" />
+               </GridPane.margin>
+            </Label>
+            <RadioButton fx:id="rbtnRepetidortrue" disable="true" layoutX="91.0" layoutY="143.0" mnemonicParsing="false" text="SI">
+               <GridPane.margin>
+                  <Insets left="80.0" top="100.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <RadioButton fx:id="rbtnRepetidorfalse" disable="true" layoutX="91.0" layoutY="213.0" mnemonicParsing="false" text="NO">
+               <GridPane.margin>
+                  <Insets left="80.0" top="150.0" />
+               </GridPane.margin>
+            </RadioButton>
+            <Button fx:id="btnAceptar" mnemonicParsing="false" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="50.0" right="50.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane fx:id="grpVentanaBaja" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane fx:id="grpVentanaConvalidar" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ComboBox fx:id="cmbCursoC" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="15.0" top="30.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="Curso: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="15.0" top="35.0" />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="cmbRequisitos" layoutX="123.0" layoutY="41.0" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets bottom="130.0" right="15.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label layoutX="26.0" layoutY="46.0" text="Requisito: ">
+               <GridPane.margin>
+                  <Insets bottom="125.0" left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <ComboBox fx:id="cmbDocumentacion" layoutX="123.0" layoutY="41.0" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets bottom="30.0" right="15.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label layoutX="26.0" layoutY="100.0" text="Requisito: ">
+               <GridPane.margin>
+                  <Insets bottom="25.0" left="15.0" />
+               </GridPane.margin>
+            </Label>
+            <ListView fx:id="lvasignaturas" maxHeight="110.0" maxWidth="188.0" prefHeight="110.0" prefWidth="188.0" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="15.0" top="150.0" />
+               </GridPane.margin>
+            </ListView>
+            <Button fx:id="btnbuscar" mnemonicParsing="false" prefHeight="29.0" prefWidth="113.0" text="BUSCAR">
+               <GridPane.margin>
+                  <Insets left="70.0" top="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnAceptar" layoutX="81.0" layoutY="207.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="113.0" text="ACEPTAR" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="50.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane fx:id="grpVentanaRenuncia" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ComboBox fx:id="cmbCursoR" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="15.0" top="30.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="Curso: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="15.0" top="35.0" />
+               </GridPane.margin>
+            </Label>
+            <ListView fx:id="lvAsignaturasR" maxHeight="110.0" maxWidth="188.0" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="50.0" right="15.0" />
+               </GridPane.margin>
+            </ListView>
+            <ComboBox fx:id="cmbMotivos" layoutX="123.0" layoutY="41.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="15.0" top="70.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Label text="Motivos: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="15.0" top="75.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="txtOtra" maxWidth="380.0" prefHeight="25.0" prefWidth="380.0" visible="false">
+               <GridPane.margin>
+                  <Insets bottom="70.0" left="15.0" right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <Button fx:id="btnBuscar" mnemonicParsing="false" prefHeight="29.0" prefWidth="113.0" text="BUSCAR">
+               <GridPane.margin>
+                  <Insets left="70.0" top="100.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="btnAceptar" layoutX="81.0" layoutY="107.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="113.0" text="ACEPTAR" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="50.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane fx:id="grpVentanaTitulo" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
       </GridPane>
    </children>
 </AnchorPane>
