@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.ElegirController">
+   <children>
+      <GridPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="277.0" minHeight="10.0" prefHeight="277.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="123.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ListView fx:id="lvlists" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FCBF7D;">
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </ListView>
+            <Button fx:id="btnAceptar" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="ACEPTAR" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="100.0" />
+               </GridPane.margin></Button>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="CANCELAR" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="100.0" />
+               </GridPane.margin></Button>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

@@ -27,15 +27,25 @@ public class MatriculaEntity {
         this.idMatricula = idMatricula;
     }
 
-    @OneToOne(mappedBy = "dnis")
+
     @Basic
     @Column(name = "Dni", nullable = false, length = 9)
     public String getDni() {
         return dni;
     }
 
+    @OneToOne(mappedBy = "dnis")
+    @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false)
+    public AlunmosEntity getDnis(){
+        return Dni;
+    }
+
     public void setDni(String dni) {
         this.dni = dni;
+    }
+
+    public void setDnis(AlunmosEntity dni){
+        Dni = dni;
     }
 
     public void setDni(AlunmosEntity dni) {
