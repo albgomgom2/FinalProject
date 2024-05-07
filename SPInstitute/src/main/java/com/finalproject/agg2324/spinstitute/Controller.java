@@ -5,15 +5,37 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class Controller {
     Alert alertA = new Alert(Alert.AlertType.CONFIRMATION);
     @FXML
     private GridPane grpDatosUsuario;
+    @FXML
+    private Label lblNombre;
+    @FXML
+    private Label lblApellidos;
+    @FXML
+    private Label lblDni;
+    @FXML
+    private Label lblEdad;
+    @FXML
+    private Label lblDireccion;
+    @FXML
+    private Label lbltelefono;
+    @FXML
+    private ImageView imgUser;
     @FXML
     private GridPane grpMenu;
     @FXML
@@ -51,11 +73,15 @@ public class Controller {
     @FXML
     private ListView<String> lvasignaturas;
     @FXML
-    private Label lblDni;
+    private TextField txtUser;
+    @FXML
+    private PasswordField txtpassword;
+
+    model newmodel = new model();
 
 
     @FXML
-    private void iniciarSesion(){
+    private void mostrarPantallaPrincipal(){
         grpaccess.setVisible(false);
         grpMenu.setVisible(true);
         grpVentanaBienvenida.setVisible(true);
@@ -245,5 +271,19 @@ public class Controller {
 
     public void selectLine(String[] Asignaturas){
         lvasignaturas.getItems().add(Asignaturas[1]);
+    }
+
+    @FXML
+    private void iniciarSesion(){
+        if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
+            mostrarPantallaPrincipal();
+            String[] withoutSpace = newmodel.dataStudents(txtUser.getText(), txtpassword.getText()).split("  ");
+            lblDni.setText(withoutSpace[0]);
+            lblNombre.setText(withoutSpace[1]);
+            lblApellidos.setText(withoutSpace[2]);
+            lblEdad.setText(withoutSpace[3]);
+            lblDireccion.setText(withoutSpace[4]);
+            lbltelefono.setText(withoutSpace[8]);
+        }
     }
 }

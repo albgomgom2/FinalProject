@@ -11,13 +11,13 @@ import java.util.Objects;
 public class AsignaturasEntity {
     private String idAsignatura;
     private String nombre;
-    private BigInteger horas;
+    private int horas;
     private List<NotasEntity> notas;
     private List<CursosEntity> idcursos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "Id_Asignatura", nullable = false, length = 10)
+    @Column(name = "id_asignaturas", nullable = false, length = 10)
     public String getIdAsignatura() {
         return idAsignatura;
     }
@@ -38,11 +38,11 @@ public class AsignaturasEntity {
 
     @Basic
     @Column(name = "Horas", nullable = false, precision = 0)
-    public BigInteger getHoras() {
+    public int getHoras() {
         return horas;
     }
 
-    public void setHoras(BigInteger horas) {
+    public void setHoras(int horas) {
         this.horas = horas;
     }
 

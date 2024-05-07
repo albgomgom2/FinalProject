@@ -13,7 +13,8 @@ public class CursosEntity {
     private String nombre;
     private String abreviatura;
     private String aula;
-    private BigInteger nivel;
+    private int nivel;
+    private int turno;
     private List<MatriculaEntity> matriculas;
     private List<AsignaturasEntity> idasignaturas;
 
@@ -60,13 +61,19 @@ public class CursosEntity {
 
     @Basic
     @Column(name = "nivel", nullable = false, precision = 0)
-    public BigInteger getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
-    public void setNivel(BigInteger nivel) {
+    public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+
+    @Basic
+    @Column(name = "turno", nullable = false, precision = 0)
+    public int getTurno(){return turno;}
+
+    public void setTurno(int turno){this.turno = turno;}
 
     @Override
     public boolean equals(Object o) {
@@ -91,7 +98,7 @@ public class CursosEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "Asig_Curso", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "Id_Curso", referencedColumnName = "Id_Curso", nullable = false), inverseJoinColumns = @JoinColumn(name = "Id_Asignatura", referencedColumnName = "Id_Asignatura", nullable = false))
+    @JoinTable(name = "Asignaturas_Cursos", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "Id_Curso", nullable = false), inverseJoinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false))
     public List<AsignaturasEntity> getIdasignaturas() {
         return idasignaturas;
     }

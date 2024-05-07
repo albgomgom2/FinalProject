@@ -5,13 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.FinalProject.AGG2324</groupId>
-  <artifactId>SPInstitute</artifactId>
+  <artifactId>VTInstitute</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>SPInstitute</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.9.2</junit.version>  </properties>
+    <junit.version>5.9.2</junit.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -24,8 +25,7 @@
       <artifactId>javafx-fxml</artifactId>
       <version>17.0.6</version>
     </dependency>
-
-<dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
@@ -86,6 +86,7 @@
           </execution>
         </executions>
       </plugin>
+
     </plugins>
   </build>
 </project>

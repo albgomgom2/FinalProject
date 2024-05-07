@@ -6,14 +6,15 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Matricula", schema = "public", catalog = "VTInstitute")
+@Table(name = "Matriculas", schema = "public", catalog = "VTInstitute")
 public class MatriculaEntity {
     private String idMatricula;
     private String dni;
     private String idCurso;
     private Date fechaMatricula;
     private boolean repetidor;
-    private AlunmosEntity Dni;
+    private String estado;
+    private AlumnosEntity Dni;
     private CursosEntity idcursos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +30,14 @@ public class MatriculaEntity {
 
 
     @Basic
-    @Column(name = "Dni", nullable = false, length = 9)
+    @Column(name = "dni", nullable = false, length = 9)
     public String getDni() {
         return dni;
     }
 
     @OneToOne(mappedBy = "dnis")
     @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false)
-    public AlunmosEntity getDnis(){
+    public AlumnosEntity getDnis(){
         return Dni;
     }
 
@@ -44,16 +45,16 @@ public class MatriculaEntity {
         this.dni = dni;
     }
 
-    public void setDnis(AlunmosEntity dni){
+    public void setDnis(AlumnosEntity dni){
         Dni = dni;
     }
 
-    public void setDni(AlunmosEntity dni) {
+    public void setDni(AlumnosEntity dni) {
         Dni = dni;
     }
 
     @Basic
-    @Column(name = "Id_Curso", nullable = false, length = 10)
+    @Column(name = "idcurso", nullable = false, length = 10)
     public String getIdCurso() {
         return idCurso;
     }
@@ -63,7 +64,7 @@ public class MatriculaEntity {
     }
 
     @Basic
-    @Column(name = "Fecha_Matricula", nullable = false)
+    @Column(name = "fechamatricula", nullable = false)
     public Date getFechaMatricula() {
         return fechaMatricula;
     }
@@ -73,7 +74,7 @@ public class MatriculaEntity {
     }
 
     @Basic
-    @Column(name = "Repetidor", nullable = false)
+    @Column(name = "repetidor", nullable = false)
     public boolean isRepetidor() {
         return repetidor;
     }
@@ -81,6 +82,12 @@ public class MatriculaEntity {
     public void setRepetidor(boolean repetidor) {
         this.repetidor = repetidor;
     }
+
+    @Basic
+    @Column(name = "estado", nullable = false, length = 30)
+    public String getEstado(){return estado;}
+
+    public void setEstado(String estado){this.estado = estado;}
 
     @Override
     public boolean equals(Object o) {
@@ -96,7 +103,7 @@ public class MatriculaEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "Id_Curso", referencedColumnName = "Id_Curso", nullable = false)
+    @JoinColumn(name = "idcurso", referencedColumnName = "Id_Curso", nullable = false, insertable = false, updatable = false)
     public CursosEntity getIdcursos() {
         return idcursos;
     }

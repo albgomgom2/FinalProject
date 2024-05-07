@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controller">
    <children>
-      <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;" visible="false">
+      <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="201.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="399.0" />
@@ -25,10 +25,6 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <TextField fx:id="txtPass" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></TextField>
             <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../../images/iniciar-sesion.png" />
@@ -42,9 +38,14 @@
                   <Image url="@../../../../images/salida.png" />
                </image>
             </ImageView>
+            <PasswordField fx:id="txtpassword" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </PasswordField>
          </children>
       </GridPane>
-      <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
+      <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -83,7 +84,7 @@
                   <Insets left="10.0" top="60.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lblPais" text="Label">
+            <Label fx:id="lbltelefono" text="Label">
                <GridPane.margin>
                   <Insets left="10.0" top="120.0" />
                </GridPane.margin>
@@ -103,7 +104,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
+      <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -299,7 +300,7 @@
             </ImageView>
          </children>
       </GridPane>
-      <GridPane fx:id="grpVentanaRenuncia" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
+      <GridPane fx:id="grpVentanaRenuncia" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>

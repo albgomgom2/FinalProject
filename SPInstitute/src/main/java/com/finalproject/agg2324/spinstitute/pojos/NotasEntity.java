@@ -11,12 +11,13 @@ public class NotasEntity {
     private String idNotas;
     private String dni;
     private String asignatura;
-    private BigInteger nota1;
-    private BigInteger nota2;
-    private BigInteger nota3;
-    private BigInteger notafinal;
+    private int nota1;
+    private int nota2;
+    private int nota3;
+    private int notafinal;
     private boolean activo;
-    private AlunmosEntity dnis;
+    private String estado;
+    private AlumnosEntity dnis;
     private AsignaturasEntity asignaturas;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,41 +53,41 @@ public class NotasEntity {
 
     @Basic
     @Column(name = "nota1", nullable = true, precision = 0)
-    public BigInteger getNota1() {
+    public int getNota1() {
         return nota1;
     }
 
-    public void setNota1(BigInteger nota1) {
+    public void setNota1(int nota1) {
         this.nota1 = nota1;
     }
 
     @Basic
     @Column(name = "nota2", nullable = true, precision = 0)
-    public BigInteger getNota2() {
+    public int getNota2() {
         return nota2;
     }
 
-    public void setNota2(BigInteger nota2) {
+    public void setNota2(int nota2) {
         this.nota2 = nota2;
     }
 
     @Basic
     @Column(name = "nota3", nullable = true, precision = 0)
-    public BigInteger getNota3() {
+    public int getNota3() {
         return nota3;
     }
 
-    public void setNota3(BigInteger nota3) {
+    public void setNota3(int nota3) {
         this.nota3 = nota3;
     }
 
     @Basic
     @Column(name = "notafinal", nullable = true, precision = 0)
-    public BigInteger getNotafinal() {
+    public int getNotafinal() {
         return notafinal;
     }
 
-    public void setNotafinal(BigInteger notafinal) {
+    public void setNotafinal(int notafinal) {
         this.notafinal = notafinal;
     }
 
@@ -99,6 +100,12 @@ public class NotasEntity {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
+    @Basic
+    @Column(name = "estado", nullable = false, length = 30)
+    public String getEstado(){return estado;}
+
+    public void setEstado(String estado){this.estado = estado;}
 
     @Override
     public boolean equals(Object o) {
@@ -114,17 +121,17 @@ public class NotasEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false)
-    public AlunmosEntity getDnis() {
+    @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false, insertable = false, updatable = false)
+    public AlumnosEntity getDnis() {
         return dnis;
     }
 
-    public void setDnis(AlunmosEntity dnis) {
+    public void setDnis(AlumnosEntity dnis) {
         this.dnis = dnis;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Asignatura", referencedColumnName = "Id_Asignatura", nullable = false)
+    @JoinColumn(name = "Asignatura", nullable = false, insertable = false, updatable = false, referencedColumnName = "id_asignaturas")
     public AsignaturasEntity getAsignaturas() {
         return asignaturas;
     }

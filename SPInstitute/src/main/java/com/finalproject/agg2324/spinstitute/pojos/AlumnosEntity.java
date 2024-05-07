@@ -1,6 +1,7 @@
 package com.finalproject.agg2324.spinstitute.pojos;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Comment;
 
 import java.math.BigInteger;
 import java.sql.Date;
@@ -9,23 +10,23 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Alunmos", schema = "public", catalog = "VTInstitute")
-public class AlunmosEntity {
+@Table(name = "Alumnos", schema = "public", catalog = "VTInstitute")
+public class AlumnosEntity {
     private String dni;
     private String nombre;
     private String apellidos;
-    private BigInteger edad;
+    private int edad;
     private String direccion;
     private String pais;
     private String localidad;
     private String ciudad;
-    private byte[] foto;
-    private String idCurso;
     private boolean activo;
     private String telefono;
     private String email;
     private Date fechaNacimiento;
     private MatriculaEntity dnis;
+    private String usuario;
+    private String contraseña;
     private Set<NotasEntity> notas;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,11 +62,11 @@ public class AlunmosEntity {
 
     @Basic
     @Column(name = "Edad", nullable = true, precision = 0)
-    public BigInteger getEdad() {
+    public int getEdad() {
         return edad;
     }
 
-    public void setEdad(BigInteger edad) {
+    public void setEdad(int edad) {
         this.edad = edad;
     }
 
@@ -110,26 +111,6 @@ public class AlunmosEntity {
     }
 
     @Basic
-    @Column(name = "Foto", nullable = false)
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
-
-    @Basic
-    @Column(name = "Id_Curso", nullable = false, length = 10)
-    public String getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(String idCurso) {
-        this.idCurso = idCurso;
-    }
-
-    @Basic
     @Column(name = "Activo", nullable = false)
     public boolean isActivo() {
         return activo;
@@ -160,7 +141,7 @@ public class AlunmosEntity {
     }
 
     @Basic
-    @Column(name = "Fecha_Nacimiento", nullable = false)
+    @Column(name = "FechaNacimiento", nullable = false)
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -173,19 +154,19 @@ public class AlunmosEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AlunmosEntity that = (AlunmosEntity) o;
-        return activo == that.activo && Objects.equals(dni, that.dni) && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(edad, that.edad) && Objects.equals(direccion, that.direccion) && Objects.equals(pais, that.pais) && Objects.equals(localidad, that.localidad) && Objects.equals(ciudad, that.ciudad) && Arrays.equals(foto, that.foto) && Objects.equals(idCurso, that.idCurso) && Objects.equals(telefono, that.telefono) && Objects.equals(email, that.email) && Objects.equals(fechaNacimiento, that.fechaNacimiento);
+        AlumnosEntity that = (AlumnosEntity) o;
+        return activo == that.activo && Objects.equals(dni, that.dni) && Objects.equals(nombre, that.nombre) && Objects.equals(apellidos, that.apellidos) && Objects.equals(edad, that.edad) && Objects.equals(direccion, that.direccion) && Objects.equals(localidad, that.localidad) && Objects.equals(ciudad, that.ciudad) && Objects.equals(pais, that.pais) && Objects.equals(telefono, that.telefono) && Objects.equals(email, that.email) && Objects.equals(fechaNacimiento, that.fechaNacimiento) && Objects.equals(usuario, that.usuario);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(dni, nombre, apellidos, edad, direccion, pais, localidad, ciudad, idCurso, activo, telefono, email, fechaNacimiento);
-        result = 31 * result + Arrays.hashCode(foto);
+        int result = Objects.hash(dni, nombre, apellidos, edad, direccion, localidad, ciudad, pais, activo, telefono, email, fechaNacimiento, usuario);
+        result = 31 * result;
         return result;
     }
 
     @OneToOne
-    @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false)
+    @JoinColumn(name = "Dni", nullable = false, insertable = false, updatable = false, referencedColumnName = "dni")
     public MatriculaEntity getDnis() {
         return dnis;
     }
@@ -202,4 +183,20 @@ public class AlunmosEntity {
     public void setNotas(Set<NotasEntity> notas) {
         this.notas = notas;
     }
+
+    @Basic
+    @Column(name = "usuario", nullable = false, length = 9)
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+
+    @Basic
+    @Column(name = "contraseña", nullable = false, length = 12)
+    public String getContraseña(){return contraseña;}
+
+    public void setContraseña(String contraseña){this.contraseña = contraseña;}
 }

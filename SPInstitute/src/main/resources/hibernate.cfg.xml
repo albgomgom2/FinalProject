@@ -6,16 +6,13 @@
   <session-factory>
     <property name="connection.url">jdbc:postgresql://localhost:5432/VTInstitute</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
-      <property name="connection.username">postgres</property>
-      <property name="connection.password">postgres</property>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.AlunmosEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.CursosEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.NotasEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.UsuariosEntity"/>
-      <!-- <property name="connection.username"/> -->
-    <!-- <property name="connection.password"/> -->
+    <property name="connection.username">postgres</property>
+    <property name="connection.password">postgres</property>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity"/>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.CursosEntity"/>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity"/>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.NotasEntity"/>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity"/>
 
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
