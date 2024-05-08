@@ -258,7 +258,7 @@ public class Controller {
     }
 
 
-
+    //funcion que abre una ventana con los datos buscados
     @FXML
     private void openSceneList(){
         try{
@@ -282,15 +282,15 @@ public class Controller {
             System.out.println(e.getMessage());
         }
     }
-
+    //funcion que recoge los datos de la ventana de busqueda
     public void selectLine(String[] Asignaturas){
         lvasignaturas.getItems().add(Asignaturas[1]);
     }
-
+    //funcion que recoge los datos del usuario
     private String dataStudents(){
         return newmodel.dataStudents(txtUser.getText(), txtpassword.getText());
     }
-
+    //funcion que recoge los rellena los labels con los datos actualizados
     @FXML
     private void iniciarSesion(){
         if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
@@ -305,7 +305,7 @@ public class Controller {
 
         }
     }
-
+    //funcion para rellenar un combobox de cursos
     private void refillCursos(){
         cmbList = new ArrayList<>();
         newmodel.cmbListCursos(cmbList);
@@ -313,7 +313,7 @@ public class Controller {
             cmbCursos.getItems().add(str);
         }
     }
-
+    //funcion que rellena los combox de las asignaturas
     private void refillAsignaturas(){
         cmbList = new ArrayList<>();
         newmodel.cmbListAsignaturasC(cmbList, lblnombreCurso.getText());
@@ -326,7 +326,7 @@ public class Controller {
             cmbAsig2.getItems().add(str);
         }
     }
-
+    //funcion que depende de los que hayamos hecho con la matricula, mostrmaos un mensaje u otro
     @FXML
     private void insertarMatricula(){
         lblnombreCurso.setText(cmbCursos.getValue());
@@ -348,7 +348,7 @@ public class Controller {
             alert.showAndWait();
         }
     }
-
+    //funcion que nos abre la ventana de modificar usuario
     @FXML
     private void VentanaModificarUsuario(){
         try{
@@ -365,7 +365,7 @@ public class Controller {
             System.out.println(e.getMessage());
         }
     }
-
+    //funcion que nos recoge los datos obtenidos de la ventana de modificacion
     public void ObtenerDatosAModificar(String datos){
         String[] withoutSpace = datos.split("  ");
         newmodel.actualizarUsuario(txtUser.getText(), withoutSpace[0], withoutSpace[1], withoutSpace[2], withoutSpace[3], withoutSpace[4], withoutSpace[5]);

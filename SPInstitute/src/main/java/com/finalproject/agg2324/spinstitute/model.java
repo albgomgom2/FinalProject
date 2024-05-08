@@ -24,6 +24,7 @@ import java.util.Objects;
 public class model {
     SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
 
+    // funcion que comprueba si existe el usuario y la contraseña
     public boolean checkUserAndPassword(String user, String password){
       try(Session session = sessionfactory.openSession()){
           Query<AlumnosEntity> alumnosQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity where usuario like '"+user+"' and contraseña like '"+password+"'");
@@ -35,6 +36,7 @@ public class model {
       return false;
     }
 
+    //funcion que recoge los datos del usuario y los devuelve a la pantalla principal
     public String dataStudents(String user, String password){
         try(Session session = sessionfactory.openSession()){
             Query<AlumnosEntity> alumnosQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity where usuario like '"+user+"' and contraseña like '"+password+"'");
@@ -50,6 +52,7 @@ public class model {
         return null;
     }
 
+    //funcion que actualiza solo algunos de los datos del usuario
     public void actualizarUsuario(String user, String direccion, String localidad, String ciudad, String telefono, String email, String contraseña){
         try(Session session = sessionfactory.openSession()){
             Query<AlumnosEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity where usuario = '"+user+"'");
@@ -69,6 +72,7 @@ public class model {
         }
     }
 
+    // funcion que rellena una lsita para posteriormente rellenar un combobox
    public void cmbListCursos(List<String> cursos){
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> cursosQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity");
@@ -81,6 +85,7 @@ public class model {
         }
     }
 
+    //funcion que rellena una lista para posteriormente rellenar un combobox
     public void cmbListAsignaturasC(List<String> asig, String nombre){
         try(Session session = sessionfactory.openSession()){
             Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where idcursos = " + idCurso(nombre));
@@ -93,6 +98,7 @@ public class model {
         }
     }
 
+    //funcion que rellena una lista para posteriormente rellenar un combobox
     public void cmbListAsignaturasR(List<String> asig, String nombre, String dni){
         try(Session session = sessionfactory.openSession()){
             Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.dni = '"+dni+"' and n.estado = 'Aprobado' and n.estado = 'Convalidado' and a.idcursos = " + idCurso(nombre));
@@ -105,6 +111,7 @@ public class model {
         }
     }
 
+    //funcion que dado un nombre del curso, me saca su id
     public int idCurso(String nombre){
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> cursoQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity Nombre like '"+nombre+"'");
@@ -118,6 +125,8 @@ public class model {
         return -1;
     }
 
+
+    //funcion que depende del estado de una matricula me hace diferentes operaciones.
     public String ckeckMatriculaCurso(String dni, String nombre){
         try(Session session = sessionfactory.openSession()){
             Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.MatriculaEntity dni = '"+dni+"' and idCurso = '"+idCurso(nombre)+"'");
@@ -142,6 +151,7 @@ public class model {
         return null;
     }
 
+    // funcion que comprueba si el usuairo esta cursando algun curso
     public boolean ckeckMatriculasCursadas(String Dni){
         try(Session session = sessionfactory.openSession()){
             Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity dni = '"+Dni+"' and estado = 'Cursando'");
@@ -153,6 +163,7 @@ public class model {
         return false;
     }
 
+    //funcion que busca las asignaturas de un curso
     public List<String> selectAsignaturas(String dni){
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> mycurso = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity c join fetch c.matriculas m where m.dni = '"+dni+"' and m.estado = 'Cursando'");
@@ -171,6 +182,7 @@ public class model {
         return null;
     }
 
+    //funcion que busca asignaturas filtradas por estados que no sean convalidados o aprobados
     public List<String> selectAsignaturasFiltradasPorEstado(String dni){
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> mycurso = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity c join fetch c.matriculas m where m.dni = '"+dni+"' and m.estado = 'Cursando'");
@@ -190,6 +202,7 @@ public class model {
         return null;
     }
 
+    //funcion que inserta una matricula
     public void insertMatricula(String dni, String nombre){
         try(Session session = sessionfactory.openSession()){
             Transaction transaction = session.beginTransaction();
@@ -206,6 +219,7 @@ public class model {
         }
     }
 
+    //funcion que modifica una matricula
     public void modificarMatricula(String dni, String nombre){
         try(Session session = sessionfactory.openSession()){
             Query<MatriculaEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where dni = '"+dni+"' and idCurso = " + idCurso(nombre));

@@ -47,6 +47,7 @@ public class ModificarController {
         this.controller = controller;
     }
 
+    //funcion para rellenar los textfield
     public void rellenarCampos(String dni, String nombre, String apellidos, String edad, String direccion, String localidad, String ciudad, String pais, String telefono, String email, String fecha, String usuario, String contraseña){
         txtMDni.setText(dni);
         txtMNombre.setText(nombre);
@@ -63,6 +64,7 @@ public class ModificarController {
         txtMFechaNacimiento.setText(fecha);
     }
 
+    //funcion que valida los campos que luego devolveremos a la pantalla principal
     public void comprobarCampos(ActionEvent actionevent){
         if(validarDireccion()){
             if(validarLocalidad()){
@@ -116,36 +118,37 @@ public class ModificarController {
         }
     }
 
+    //funcion para validar una direccion
     private boolean validarDireccion(){
         Pattern p = Pattern.compile("^(Calle|Carrera|Diagonal)\\s\\d{2}\\s#\\d{2}-\\d{2}\\s[a-zA-Z\\s]+$");
         Matcher m = p.matcher(txtMDireccion.getText());
         return m.matches();
     }
-
+    //funcion para validar una ciudad
     private boolean validarCiudad(){
         Pattern p = Pattern.compile("^[a-zA-Z ]{1,30}");
         Matcher m = p.matcher(txtMCiudad.getText());
         return m.matches();
     }
-
+    //funcion para validar una localidad
     private boolean validarLocalidad(){
         Pattern p = Pattern.compile("^[a-zA-Z ]{1,30}");
         Matcher m = p.matcher(txtMLocalidad.getText());
         return m.matches();
     }
-
+    //funcion para validar un telefono
     private boolean validarTelefono(){
         Pattern p = Pattern.compile("^(\\+34|0034|34)?[6789]\\d{8}$");
         Matcher m = p.matcher(txtMTelefono.getText());
         return m.matches();
     }
-
+    //funcion para validar un email
     private boolean validarEmail(){
         Pattern p = Pattern.compile("^[\\w-+]+(\\.[\\w-]{1,62}){0,126}@[\\w-]{1,63}(\\.[\\w-]{1,62})+/[\\w-]+$");
         Matcher m = p.matcher(txtMEmail.getText());
         return m.matches();
     }
-
+    //funcion para validar una contraseña
     private boolean validarContraseña(){
         if(txtMContraseña.getText().length() > 8){
             boolean mayuscula = false;
@@ -181,9 +184,7 @@ public class ModificarController {
             return false;
         }
     }
-
-
-
+    //funcion que me recoge los datos en un string
     private String modificarDatosController(){
         return txtMDireccion.getText() + "  " + txtMLocalidad.getText() + "  " + txtMCiudad.getText() + "  " + txtMTelefono.getText() + "  " + txtMEmail.getText() + "  " + txtMContraseña.getText();
     }

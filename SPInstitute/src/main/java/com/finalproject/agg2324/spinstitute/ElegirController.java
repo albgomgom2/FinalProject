@@ -14,7 +14,7 @@ public class ElegirController {
     ListView<String> lvlists;
 
     private Controller controller;
-
+    //funcion que rellena una listview con los datos obtenidos de una select de asignaturas
     public void refillList(List<String> lists){
         for(String str : lists){
             lvlists.getItems().add(str);
@@ -24,7 +24,7 @@ public class ElegirController {
     public void setParentController(Controller controller){
         this.controller = controller;
     }
-
+    //funcion que devuelve el item selecciona a la ventana principal
     public void getOptionSelected(ActionEvent actionEvent){
         if(!lvlists.getItems().isEmpty()){
             String list = lvlists.getSelectionModel().getSelectedItem();
