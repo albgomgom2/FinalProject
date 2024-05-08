@@ -15,13 +15,14 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class model {
     SessionFactory sessionfactory = new Configuration().configure().buildSessionFactory();
-
 
     public boolean checkUserAndPassword(String user, String password){
       try(Session session = sessionfactory.openSession()){
@@ -49,7 +50,7 @@ public class model {
         return null;
     }
 
-    public void actualizarUsuario(String user, String direccion, String ciudad, String localidad, String telefono, String email, String contraseña, byte[] foto){
+    public void actualizarUsuario(String user, String direccion, String localidad, String ciudad, String telefono, String email, String contraseña){
         try(Session session = sessionfactory.openSession()){
             Query<AlumnosEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity where usuario = '"+user+"'");
             List<AlumnosEntity> alumnosEntities = myQuery.list();
@@ -80,7 +81,31 @@ public class model {
         }
     }
 
-    public String idCurso(String nombre){
+    public void cmbListAsignaturasC(List<String> asig, String nombre){
+        try(Session session = sessionfactory.openSession()){
+            Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where idcursos = " + idCurso(nombre));
+            List<AsignaturasEntity> asignaturasEntity = asigQuery.list();
+            for (AsignaturasEntity asignaturas : asignaturasEntity){
+                asig.add(asignaturas.getNombre());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void cmbListAsignaturasR(List<String> asig, String nombre, String dni){
+        try(Session session = sessionfactory.openSession()){
+            Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.dni = '"+dni+"' and n.estado = 'Aprobado' and n.estado = 'Convalidado' and a.idcursos = " + idCurso(nombre));
+            List<AsignaturasEntity> notas = myQuery.list();
+            for(AsignaturasEntity asignaturas : notas){
+                asig.add(asignaturas.getNombre());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int idCurso(String nombre){
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> cursoQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity Nombre like '"+nombre+"'");
             List<CursosEntity> curso = cursoQuery.list();
@@ -90,18 +115,31 @@ public class model {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return null;
+        return -1;
     }
 
-    public boolean ckeckMatricula(String dni, String nombre){
+    public String ckeckMatriculaCurso(String dni, String nombre){
         try(Session session = sessionfactory.openSession()){
-            Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.MatriculaEntity dni = '"+dni+"' and estado = 'Aprobado' and idCurso = '"+idCurso(nombre)+"'");
-            List<MatriculaEntity> matricula = matriculaQuery.list();
-            return matricula.isEmpty();
+            Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.agg2324.finalproject.model.pojos.MatriculaEntity dni = '"+dni+"' and idCurso = '"+idCurso(nombre)+"'");
+            List<MatriculaEntity> matriculaEntity = matriculaQuery.list();
+            MatriculaEntity matricula = matriculaEntity.get(0);
+            if(Objects.equals(matricula.getEstado(), "Aprobado")){
+                return "Aprobado";
+            }else if(Objects.equals(matricula.getEstado(), "Renunciado") || Objects.equals(matricula.getEstado(), "Suspendido")){
+                modificarMatricula(dni, nombre);
+                return "Actualizado";
+            }else if(matriculaEntity.isEmpty()){
+                if(ckeckMatriculasCursadas(dni)){
+                    insertMatricula(dni, nombre);
+                    return "Insertado";
+                }else{
+                    return "Cursando";
+                }
+            }
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return false;
+        return null;
     }
 
     public boolean ckeckMatriculasCursadas(String Dni){
@@ -119,13 +157,12 @@ public class model {
         try(Session session = sessionfactory.openSession()){
             Query<CursosEntity> mycurso = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity c join fetch c.matriculas m where m.dni = '"+dni+"' and m.estado = 'Cursando'");
             List<CursosEntity> cursosEntities = mycurso.list();
+            CursosEntity curso = cursosEntities.get(0);
             List<String> listasig = new ArrayList<>();
-            for(CursosEntity cursos : cursosEntities){
-                Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.dni = '"+dni+"' and n.asignatura = '"+cursos.getIdasignaturas()+"'");
-                List<AsignaturasEntity> notas = myQuery.list();
-                for(AsignaturasEntity asignaturas : notas){
-                    listasig.add(asignaturas.getNombre());
-                }
+            Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where idcursos = " + curso.getIdCurso());
+            List<AsignaturasEntity> asig = myQuery.list();
+            for(AsignaturasEntity asignaturas : asig){
+                listasig.add(asignaturas.getNombre());
             }
             return listasig;
         }catch(Exception e){
@@ -140,7 +177,7 @@ public class model {
             List<CursosEntity> cursosEntities = mycurso.list();
             List<String> listasig = new ArrayList<>();
             for(CursosEntity cursos : cursosEntities){
-                Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.dni = '"+dni+"' and n.asignatura = '"+cursos.getIdasignaturas()+"' and n.estado != 'Convalidado' and n.estado != 'Aprobado'");
+                Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.dni = '"+dni+"' and a.idcursos = '"+cursos.getIdCurso()+"' and n.estado != 'Convalidado' and n.estado != 'Aprobado'");
                 List<AsignaturasEntity> notas = myQuery.list();
                 for(AsignaturasEntity asignaturas : notas){
                     listasig.add(asignaturas.getNombre());
@@ -151,5 +188,37 @@ public class model {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public void insertMatricula(String dni, String nombre){
+        try(Session session = sessionfactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            MatriculaEntity matricula = new MatriculaEntity();
+            matricula.setDni(dni);
+            matricula.setIdCurso(idCurso(nombre));
+            matricula.setFechaMatricula(Date.valueOf(LocalDate.now()));
+            matricula.setRepetidor(false);
+            matricula.setEstado("Cursando");
+            session.save(matricula);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void modificarMatricula(String dni, String nombre){
+        try(Session session = sessionfactory.openSession()){
+            Query<MatriculaEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where dni = '"+dni+"' and idCurso = " + idCurso(nombre));
+            List<MatriculaEntity> matriculaEntities = myQuery.list();
+            Transaction transaction = session.beginTransaction();
+            MatriculaEntity matricula = matriculaEntities.get(0);
+            matricula.setFechaMatricula(Date.valueOf(LocalDate.now()));
+            matricula.setEstado("Cursando");
+            matricula.setRepetidor(true);
+            session.save(matricula);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }

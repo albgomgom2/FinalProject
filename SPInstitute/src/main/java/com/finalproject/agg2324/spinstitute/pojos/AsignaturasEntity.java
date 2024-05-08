@@ -9,7 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "Asignaturas", schema = "public", catalog = "VTInstitute")
 public class AsignaturasEntity {
-    private String idAsignatura;
+    private int idAsignatura;
     private String nombre;
     private int horas;
     private List<NotasEntity> notas;
@@ -18,11 +18,11 @@ public class AsignaturasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_asignaturas", nullable = false, length = 10)
-    public String getIdAsignatura() {
+    public int getIdAsignatura() {
         return idAsignatura;
     }
 
-    public void setIdAsignatura(String idAsignatura) {
+    public void setIdAsignatura(int idAsignatura) {
         this.idAsignatura = idAsignatura;
     }
 

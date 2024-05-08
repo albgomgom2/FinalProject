@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controller">
    <children>
-      <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
+      <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="201.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="399.0" />
@@ -45,7 +45,7 @@
             </PasswordField>
          </children>
       </GridPane>
-      <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
+      <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -89,12 +89,12 @@
                   <Insets left="10.0" top="120.0" />
                </GridPane.margin>
             </Label>
-            <ImageView fx:id="imgcerrarsesion" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#mostrarVentanaIniciarSesion" onMouseEntered="#mostrartooltipCerrarSesion" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <ImageView fx:id="imgcerrarsesion" fitHeight="62.0" fitWidth="56.0" onMouseClicked="#mostrarVentanaIniciarSesion" onMouseEntered="#mostrartooltipCerrarSesion" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../../../images/cerrar-sesion.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#VentanaModificarUsuario" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="30.0" right="30.0" />
                </GridPane.margin>
@@ -102,9 +102,10 @@
                   <Image url="@../../../../images/editar-codigo.png" />
                </image>
             </ImageView>
+            <Label fx:id="lblnombreCurso" text="Label" visible="false" />
          </children>
       </GridPane>
-      <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
+      <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -164,7 +165,7 @@
             </Label>
          </children>
       </GridPane>
-      <GridPane fx:id="grpVentanaMatricula" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+      <GridPane fx:id="grpVentanaMatricula" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -227,7 +228,7 @@
                   <Insets left="80.0" top="150.0" />
                </GridPane.margin>
             </RadioButton>
-            <Button fx:id="btnAcept" mnemonicParsing="false" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button fx:id="btnAcept" mnemonicParsing="false" onMouseClicked="#insertarMatricula" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" right="50.0" />
                </GridPane.margin>
@@ -250,12 +251,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="cmbCursoC" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbAsignaturas" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="15.0" top="30.0" />
                </GridPane.margin>
             </ComboBox>
-            <Label text="Curso: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label text="Asignaturas: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="15.0" top="35.0" />
                </GridPane.margin>
@@ -290,7 +291,7 @@
                   <Insets bottom="30.0" left="50.0" />
                </GridPane.margin>
             </Button>
-            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#openSceneList" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="80.0" right="70.0" />
                </GridPane.margin>
@@ -308,12 +309,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="cmbCursoR" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbAsig2" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="15.0" top="30.0" />
                </GridPane.margin>
             </ComboBox>
-            <Label text="Curso: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label text="Asignaturas: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="15.0" top="35.0" />
                </GridPane.margin>

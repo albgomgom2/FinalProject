@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +20,7 @@ import java.util.Objects;
 
 public class Controller {
     Alert alertA = new Alert(Alert.AlertType.CONFIRMATION);
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
     @FXML
     private GridPane grpDatosUsuario;
     @FXML
@@ -34,6 +35,8 @@ public class Controller {
     private Label lblDireccion;
     @FXML
     private Label lbltelefono;
+    @FXML
+    private Label lblnombreCurso;
     @FXML
     private ImageView imgUser;
     @FXML
@@ -76,7 +79,16 @@ public class Controller {
     private TextField txtUser;
     @FXML
     private PasswordField txtpassword;
+    @FXML
+    private ComboBox<String> cmbAsignaturas;
+    @FXML
+    private ComboBox<String> cmbAsig2;
+    @FXML
+    private ComboBox<String> cmbCursos;
 
+    private List<String> cmbList;
+
+    @FXML
     model newmodel = new model();
 
 
@@ -245,20 +257,22 @@ public class Controller {
         Tooltip.install(imgbuscar, new Tooltip("Buscar Asignaturas"));
     }
 
-    /*@FXML
+
+
+    @FXML
     private void openSceneList(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/ElegirAsignaturas.fxml"));
             Parent root = fxmlLoader.load();
             ElegirController elegir = fxmlLoader.getController();
             if(grpVentanaConvalidar.isVisible()){
-                elegir.refillList(model.selectAsignaturas(lblDni.getText()));
+                elegir.refillList(newmodel.selectAsignaturas(lblDni.getText()));
                 elegir.setParentController(this);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
             }else if(grpVentanaRenuncia.isVisible()){
-                elegir.refillList(model.selectAsignaturasFiltradasPorEstado(lblDni.getText()));
+                elegir.refillList(newmodel.selectAsignaturasFiltradasPorEstado(lblDni.getText()));
                 elegir.setParentController(this);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
@@ -267,23 +281,93 @@ public class Controller {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }*/
+    }
 
     public void selectLine(String[] Asignaturas){
         lvasignaturas.getItems().add(Asignaturas[1]);
+    }
+
+    private String dataStudents(){
+        return newmodel.dataStudents(txtUser.getText(), txtpassword.getText());
     }
 
     @FXML
     private void iniciarSesion(){
         if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
             mostrarPantallaPrincipal();
-            String[] withoutSpace = newmodel.dataStudents(txtUser.getText(), txtpassword.getText()).split("  ");
+            String[] withoutSpace = dataStudents().split("  ");
             lblDni.setText(withoutSpace[0]);
             lblNombre.setText(withoutSpace[1]);
             lblApellidos.setText(withoutSpace[2]);
             lblEdad.setText(withoutSpace[3]);
             lblDireccion.setText(withoutSpace[4]);
             lbltelefono.setText(withoutSpace[8]);
+
         }
+    }
+
+    private void refillCursos(){
+        cmbList = new ArrayList<>();
+        newmodel.cmbListCursos(cmbList);
+        for(String str : cmbList){
+            cmbCursos.getItems().add(str);
+        }
+    }
+
+    private void refillAsignaturas(){
+        cmbList = new ArrayList<>();
+        newmodel.cmbListAsignaturasC(cmbList, lblnombreCurso.getText());
+        for(String str : cmbList){
+            cmbAsignaturas.getItems().add(str);
+        }
+        cmbList = new ArrayList<>();
+        newmodel.cmbListAsignaturasR(cmbList, lblnombreCurso.getText(), lblDni.getText());
+        for (String str : cmbList){
+            cmbAsig2.getItems().add(str);
+        }
+    }
+
+    @FXML
+    private void insertarMatricula(){
+        lblnombreCurso.setText(cmbCursos.getValue());
+        String resultado = newmodel.ckeckMatriculaCurso(lblDni.getText(), lblnombreCurso.getText());
+        if(Objects.equals(resultado, "Aprobado")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Este curso ya lo tienes aprobado");
+            alert.showAndWait();
+        }else if(Objects.equals(resultado, "Actualizado") || Objects.equals(resultado, "Insertado")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("La matricula se ha realizado correctamente");
+            alert.showAndWait();
+        }else if(Objects.equals(resultado, "Cursando")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Ya estas en este curso");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void VentanaModificarUsuario(){
+        try{
+            String[] withoutSpace = dataStudents().split("  ");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ModificarDatosUsuario.fxml"));
+            Parent root = fxmlLoader.load();
+            ModificarController controller = fxmlLoader.getController();
+            controller.rellenarCampos(withoutSpace[0],withoutSpace[1],withoutSpace[2],withoutSpace[3],withoutSpace[4],withoutSpace[5],withoutSpace[6],withoutSpace[7],withoutSpace[8],withoutSpace[9],withoutSpace[10],withoutSpace[11],withoutSpace[12]);
+            controller.setParentController(this);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void ObtenerDatosAModificar(String datos){
+        String[] withoutSpace = datos.split("  ");
+        newmodel.actualizarUsuario(txtUser.getText(), withoutSpace[0], withoutSpace[1], withoutSpace[2], withoutSpace[3], withoutSpace[4], withoutSpace[5]);
     }
 }

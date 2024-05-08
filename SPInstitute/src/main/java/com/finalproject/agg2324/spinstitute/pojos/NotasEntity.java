@@ -8,9 +8,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "Notas", schema = "public", catalog = "VTInstitute")
 public class NotasEntity {
-    private String idNotas;
+    private int idNotas;
     private String dni;
-    private String asignatura;
+    private int asignatura;
     private int nota1;
     private int nota2;
     private int nota3;
@@ -23,11 +23,11 @@ public class NotasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id_notas", nullable = false, length = 10)
-    public String getIdNotas() {
+    public int getIdNotas() {
         return idNotas;
     }
 
-    public void setIdNotas(String idNotas) {
+    public void setIdNotas(int idNotas) {
         this.idNotas = idNotas;
     }
 
@@ -43,11 +43,11 @@ public class NotasEntity {
 
     @Basic
     @Column(name = "Asignatura", nullable = false, length = 10)
-    public String getAsignatura() {
+    public int getAsignatura() {
         return asignatura;
     }
 
-    public void setAsignatura(String asignatura) {
+    public void setAsignatura(int asignatura) {
         this.asignatura = asignatura;
     }
 

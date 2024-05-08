@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.ModificarController">
+   <children>
+      <GridPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="105.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="134.0" minWidth="10.0" prefWidth="105.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="172.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="DNI: " GridPane.rowIndex="1" />
+            <Label text="Nombre: " GridPane.rowIndex="2" />
+            <Label text="Apellidos: " GridPane.rowIndex="3" />
+            <Label text="Edad: " GridPane.rowIndex="4" />
+            <Label text="Dirección" GridPane.rowIndex="5" />
+            <Label text="Localidad: " GridPane.rowIndex="6" />
+            <Label text="Ciudad: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Pais: " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label text="Telefono: " GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label text="Email: " GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label text="Usuario: " GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <TextField fx:id="txtMDni" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMNombre" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMApellido" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMEdad" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMDireccion" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMLocalidad" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMCiudad" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMPais" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMTelefono" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMEmail" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="txtMUsuario" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Fecha de Nacimiento: " GridPane.rowIndex="7" />
+            <Label text="Contraseña: " GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="txtMFechaNacimiento" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label prefHeight="35.0" prefWidth="129.0" text="Editar Datos" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label prefHeight="35.0" prefWidth="142.0" text="del Usuario" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#comprobarCampos" prefHeight="38.0" prefWidth="89.0" text="Modificar" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <PasswordField fx:id="txtMContraseña" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </PasswordField>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
