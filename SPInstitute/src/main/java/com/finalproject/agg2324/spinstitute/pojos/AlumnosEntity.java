@@ -6,6 +6,7 @@ import org.hibernate.annotations.Comment;
 import java.math.BigInteger;
 import java.sql.Date;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class AlumnosEntity {
     private String usuario;
     private String contraseña;
     private Set<NotasEntity> notas;
+    private List<PagosEntity> pagos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -183,6 +185,11 @@ public class AlumnosEntity {
     public void setNotas(Set<NotasEntity> notas) {
         this.notas = notas;
     }
+
+    @OneToMany(mappedBy = "dni")
+    public List<PagosEntity> getPagosEntities() {return pagos;}
+
+    public void setPagos(List<PagosEntity> pagos) {this.pagos = pagos;}
 
     @Basic
     @Column(name = "usuario", nullable = false, length = 9)

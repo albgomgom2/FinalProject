@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controller">
    <children>
       <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;" visible="false">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="201.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="399.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="201.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="399.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <Label text="Usuario: " GridPane.halignment="CENTER" />
             <Label text="Contraseña: " GridPane.halignment="CENTER" GridPane.rowIndex="1" />
@@ -25,7 +25,7 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></TextField>
-            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../../images/iniciar-sesion.png" />
                </image>
@@ -46,45 +46,40 @@
          </children>
       </GridPane>
       <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="254.0" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="254.0" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <ImageView fx:id="imgUser" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="TOP">
+            <Label fx:id="lblNombre" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="10.0" top="10.0" />
-               </GridPane.margin>
-            </ImageView>
-            <Label fx:id="lblNombre" text="Label" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="90.0" top="20.0" />
+                  <Insets left="10.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lblApellidos" text="Label" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label fx:id="lblApellidos" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="90.0" top="50.0" />
+                  <Insets left="10.0" top="50.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lblDni" text="Label" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+            <Label fx:id="lblDni" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="90.0" top="100.0" />
+                  <Insets left="10.0" top="110.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lblEdad" text="Label" GridPane.valignment="TOP">
+            <Label fx:id="lblEdad" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="10.0" top="100.0" />
+                  <Insets left="10.0" top="80.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lblDireccion" text="Label">
+            <Label fx:id="lblDireccion">
                <GridPane.margin>
                   <Insets left="10.0" top="60.0" />
                </GridPane.margin>
             </Label>
-            <Label fx:id="lbltelefono" text="Label">
+            <Label fx:id="lblemail">
                <GridPane.margin>
                   <Insets left="10.0" top="120.0" />
                </GridPane.margin>
@@ -94,29 +89,34 @@
                   <Image url="@../../../../images/cerrar-sesion.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#VentanaModificarUsuario" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets bottom="30.0" right="30.0" />
+                  <Insets right="5.0" top="10.0" />
                </GridPane.margin>
                <image>
                   <Image url="@../../../../images/editar-codigo.png" />
                </image>
             </ImageView>
             <Label fx:id="lblnombreCurso" text="Label" visible="false" />
+            <Label fx:id="lblusuario" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
       <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;">
-        <columnConstraints>
+         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-        </rowConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <ImageView fx:id="imgBaja" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaBaja" onMouseEntered="#mostrartooltipBaja" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -151,12 +151,12 @@
          </children>
       </GridPane>
       <GridPane fx:id="grpVentanaBienvenida" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
             <Label prefHeight="189.0" prefWidth="329.0" text="BIENVENIDO A VTInstitute" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
@@ -165,7 +165,7 @@
             </Label>
          </children>
       </GridPane>
-      <GridPane fx:id="grpVentanaMatricula" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
+      <GridPane fx:id="grpVentanaMatricula" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -228,7 +228,7 @@
                   <Insets left="80.0" top="150.0" />
                </GridPane.margin>
             </RadioButton>
-            <Button fx:id="btnAcept" mnemonicParsing="false" onMouseClicked="#insertarMatricula" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button fx:id="btnAcept" mnemonicParsing="false" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" right="50.0" />
                </GridPane.margin>
@@ -243,7 +243,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <GridPane fx:id="grpVentanaConvalidar" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">
+      <GridPane fx:id="grpVentanaConvalidar" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
@@ -286,12 +286,7 @@
                   <Insets right="15.0" top="150.0" />
                </GridPane.margin>
             </ListView>
-            <Button fx:id="btnaceptar" layoutX="81.0" layoutY="207.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="113.0" text="ACEPTAR" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets bottom="30.0" left="50.0" />
-               </GridPane.margin>
-            </Button>
-            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#openSceneList" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="80.0" right="70.0" />
                </GridPane.margin>
@@ -299,6 +294,15 @@
                   <Image url="@../../../../images/lupa.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="52.0" fitWidth="52.0" onMouseClicked="#realizarConvalidacion" pickOnBounds="true" preserveRatio="true" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="50.0" />
+               </GridPane.margin>
+               <image>
+                  <Image url="@../../../../images/aprobar.png" />
+               </image>
+            </ImageView>
+            <Label text="Label" visible="false" />
          </children>
       </GridPane>
       <GridPane fx:id="grpVentanaRenuncia" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">

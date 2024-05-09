@@ -22,7 +22,7 @@ public class NotasEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "Id_notas", nullable = false, length = 10)
+    @Column(name = "Id_notas", nullable = false)
     public int getIdNotas() {
         return idNotas;
     }

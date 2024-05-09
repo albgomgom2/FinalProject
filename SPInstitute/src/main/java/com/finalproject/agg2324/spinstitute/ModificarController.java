@@ -65,7 +65,7 @@ public class ModificarController {
     }
 
     //funcion que valida los campos que luego devolveremos a la pantalla principal
-    public void comprobarCampos(ActionEvent actionevent){
+    public void comprobarCampos(javafx.event.ActionEvent actionevent){
         if(validarDireccion()){
             if(validarLocalidad()){
                 if(validarCiudad()){
@@ -188,4 +188,5 @@ public class ModificarController {
     private String modificarDatosController(){
         return txtMDireccion.getText() + "  " + txtMLocalidad.getText() + "  " + txtMCiudad.getText() + "  " + txtMTelefono.getText() + "  " + txtMEmail.getText() + "  " + txtMContraseña.getText();
     }
+
 }

@@ -1,9 +1,6 @@
 package com.finalproject.agg2324.spinstitute;
 
-import com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity;
-import com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity;
-import com.finalproject.agg2324.spinstitute.pojos.CursosEntity;
-import com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity;
+import com.finalproject.agg2324.spinstitute.pojos.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -229,7 +226,90 @@ public class model {
             matricula.setFechaMatricula(Date.valueOf(LocalDate.now()));
             matricula.setEstado("Cursando");
             matricula.setRepetidor(true);
-            session.save(matricula);
+            session.update(matricula);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    //funcion que devuelve si se puede convalidar una asignatura
+    public boolean convalidarAsignatura(String dni, String nombre){
+        try(Session session = sessionfactory.openSession()){
+            //Buscar esa asignatura en otros cursos
+            Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where nombre = '"+nombre+"'");
+            List<AsignaturasEntity> asignaturasEntities = asigQuery.list();
+            if(asignaturasEntities.size() > 1){
+                for(AsignaturasEntity entity : asignaturasEntities){
+                    Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where dni = '"+dni+"' and asignatura = " + entity.getIdAsignatura());
+                    List<NotasEntity> notasEntities = notasQuery.list();
+                    if(!notasEntities.isEmpty()){
+                        for(NotasEntity notasEntity:notasEntities){
+                            if(notasEntity.getEstado() == "Aprobado"){
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+            }else{
+                return false;
+            }
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    //funcion que devuelve el id de la asignatura de una lista de nombre de asignaturas
+    private List<Integer> idAsignatura(List<String> nombre){
+        try(Session session = sessionfactory.openSession()){
+            List<Integer> ids = new ArrayList<>();
+            for(String asignaturas : nombre){
+                Query<AsignaturasEntity> asigquery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity nombre like '"+asignaturas+"'");
+                List<AsignaturasEntity> asignatura = asigquery.list();
+                for(AsignaturasEntity asig:asignatura){
+                    ids.add(asig.getIdAsignatura());
+                }
+            }
+            return ids;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    //funcion que relaiza las convalidaciones
+    public void updateNotasConvalidacion(String dni, List<String> nombres){
+        try(Session session = sessionfactory.openSession()){
+            Query<MatriculaEntity> matQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where dni = '"+dni+"' and estado = 'Cursando'");
+            MatriculaEntity matriculaEntity = matQuery.uniqueResult();
+            for(int i : Objects.requireNonNull(idAsignatura(nombres))){
+                Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where idcursos = " + matriculaEntity.getIdCurso() +" and idAsignatura = " + i);
+                AsignaturasEntity asignaturasEntity = asigQuery.uniqueResult();
+                Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where asignatura = " + asignaturasEntity.getIdAsignatura());
+                List<NotasEntity> notasEntities = notasQuery.list();
+                Transaction transaction = session.beginTransaction();
+                NotasEntity notas = notasEntities.get(0);
+                notas.setEstado("Convalidado");
+                session.update(notas);
+                transaction.commit();
+            }
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //funcion que realiza la insercion en la tabla de pagos
+    public void insertarPago(String dni, String operacion, String cuenta, int cantidad){
+        try(Session session = sessionfactory.openSession()){
+            Transaction transaction = session.beginTransaction();
+            PagosEntity pagosEntity = new PagosEntity();
+            pagosEntity.setDni(dni);
+            pagosEntity.setOperacion(operacion);
+            pagosEntity.setCuenta(cuenta);
+            pagosEntity.setCantidad(cantidad);
+            session.save(pagosEntity);
             transaction.commit();
         }catch(Exception e){
             System.out.println(e.getMessage());

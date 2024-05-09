@@ -38,6 +38,8 @@ public class Controller {
     @FXML
     private Label lblnombreCurso;
     @FXML
+    private Label lblidAsignatura;
+    @FXML
     private ImageView imgUser;
     @FXML
     private GridPane grpMenu;
@@ -88,7 +90,7 @@ public class Controller {
 
     private List<String> cmbList;
 
-    @FXML
+
     model newmodel = new model();
 
 
@@ -257,7 +259,6 @@ public class Controller {
         Tooltip.install(imgbuscar, new Tooltip("Buscar Asignaturas"));
     }
 
-
     //funcion que abre una ventana con los datos buscados
     @FXML
     private void openSceneList(){
@@ -283,13 +284,23 @@ public class Controller {
         }
     }
     //funcion que recoge los datos de la ventana de busqueda
-    public void selectLine(String[] Asignaturas){
-        lvasignaturas.getItems().add(Asignaturas[1]);
+    public void selectLine(String Asignaturas){
+        lblidAsignatura.setText(Asignaturas);
+        if(newmodel.convalidarAsignatura(lblDni.getText(),Asignaturas)){
+            lvasignaturas.getItems().add(Asignaturas);
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("La asignatura " + lblidAsignatura.getText() + " no se puede convalidar, no cumples los requisitos");
+            alert.showAndWait();
+        }
     }
+
     //funcion que recoge los datos del usuario
     private String dataStudents(){
         return newmodel.dataStudents(txtUser.getText(), txtpassword.getText());
     }
+
     //funcion que recoge los rellena los labels con los datos actualizados
     @FXML
     private void iniciarSesion(){
@@ -370,4 +381,46 @@ public class Controller {
         String[] withoutSpace = datos.split("  ");
         newmodel.actualizarUsuario(txtUser.getText(), withoutSpace[0], withoutSpace[1], withoutSpace[2], withoutSpace[3], withoutSpace[4], withoutSpace[5]);
     }
+    //funcion que realiza la actualizacion de las notas(convalidacion) y abre la ventana de descargas
+    @FXML
+    private void realizarConvalidacion(){
+        newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
+        openSceneDescargasConvalidar();
+    }
+    //funcion que abre la ventana de actualizacion
+    private void openSceneDescargasConvalidar(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DescargarDocumento.fxml"));
+            Parent root = fxmlLoader.load();
+            DescargarController controller = fxmlLoader.getController();
+            controller.cargarTextoConvalidar();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void abrirventanaPagosMatricula(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/VentanaPagos.fxml"));
+            Parent root = fxmlLoader.load();
+            PagosController controller = fxmlLoader.getController();
+            if(grpVentanaMatricula.isVisible()){
+                controller.refillCampos(lblDni.getText(), "Matricula");
+            }else{
+                controller.refillCampos(lblDni.getText(), "Titulo");
+            }
+            controller.refillcantidadpago();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 }
