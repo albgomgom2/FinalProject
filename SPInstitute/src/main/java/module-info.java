@@ -12,6 +12,8 @@ module com.finalproject.agg2324.spinstitute {
     exports com.finalproject.agg2324.spinstitute;
     opens com.finalproject.agg2324.spinstitute.pojos to javafx.fxml;
     exports com.finalproject.agg2324.spinstitute.pojos;
+    exports com.finalproject.agg2324.spinstitute.Controllers;
+    opens com.finalproject.agg2324.spinstitute.Controllers to javafx.fxml;
 }
 
 

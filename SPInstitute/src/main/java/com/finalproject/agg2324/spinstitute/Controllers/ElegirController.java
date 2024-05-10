@@ -1,4 +1,4 @@
-package com.finalproject.agg2324.spinstitute;
+package com.finalproject.agg2324.spinstitute.Controllers;
 
 import javafx.fxml.FXML;
 

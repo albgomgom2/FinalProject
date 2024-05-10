@@ -11,7 +11,7 @@ public class PagosEntity {
     private int idPagos;
     private String dni;
     private String cuenta;
-    private int cantidad;
+    private double cantidad;
     private String operacion;
     private AlumnosEntity dnis;
 
@@ -36,9 +36,9 @@ public class PagosEntity {
 
     @Basic
     @Column(name = "cantidad", nullable = false)
-    public int getCantidad() {return cantidad;}
+    public double getCantidad() {return cantidad;}
 
-    public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+    public void setCantidad(double cantidad) {this.cantidad = cantidad;}
 
     @Basic
     @Column(name = "Operacion", nullable = false, length = 10)

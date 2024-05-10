@@ -13,7 +13,6 @@ public class CursosEntity {
     private String nombre;
     private String abreviatura;
     private String aula;
-    private int nivel;
     private int turno;
     private List<MatriculaEntity> matriculas;
     private List<AsignaturasEntity> idasignaturas;
@@ -60,16 +59,6 @@ public class CursosEntity {
     }
 
     @Basic
-    @Column(name = "nivel", nullable = false, precision = 0)
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    @Basic
     @Column(name = "turno", nullable = false, precision = 0)
     public int getTurno(){return turno;}
 
@@ -80,12 +69,12 @@ public class CursosEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CursosEntity that = (CursosEntity) o;
-        return Objects.equals(idCurso, that.idCurso) && Objects.equals(nombre, that.nombre) && Objects.equals(abreviatura, that.abreviatura) && Objects.equals(aula, that.aula) && Objects.equals(nivel, that.nivel);
+        return Objects.equals(idCurso, that.idCurso) && Objects.equals(nombre, that.nombre) && Objects.equals(abreviatura, that.abreviatura) && Objects.equals(aula, that.aula);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCurso, nombre, abreviatura, aula, nivel);
+        return Objects.hash(idCurso, nombre, abreviatura, aula);
     }
 
     @OneToMany(mappedBy = "idcursos")

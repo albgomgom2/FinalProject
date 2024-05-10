@@ -1,5 +1,6 @@
-package com.finalproject.agg2324.spinstitute;
+package com.finalproject.agg2324.spinstitute.Controllers;
 
+import com.finalproject.agg2324.spinstitute.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +39,16 @@ public class Controller {
     private Label lblnombreCurso;
     @FXML
     private Label lblidAsignatura;
+    @FXML
+    private Label lblnombrefichero;
+    @FXML
+    private RadioButton rbtnMañana;
+    @FXML
+    private RadioButton rbtnTarde;
+    @FXML
+    private RadioButton rbtnPrimero;
+    @FXML
+    private RadioButton rbtnSegundo;
     @FXML
     private ImageView imgUser;
     @FXML
@@ -92,16 +102,7 @@ public class Controller {
 
 
     model newmodel = new model();
-
-
-    @FXML
-    private void mostrarPantallaPrincipal(){
-        grpaccess.setVisible(false);
-        grpMenu.setVisible(true);
-        grpVentanaBienvenida.setVisible(true);
-        grpDatosUsuario.setVisible(true);
-    }
-
+    //funcion para salir de la aplicacionn
     @FXML
     private void Salir(){
         alertA.setTitle("Attention");
@@ -112,6 +113,15 @@ public class Controller {
         if(alertA.getResult().equals(ButtonType.OK)){
             System.exit(0);
         }
+    }
+
+    //Parte de Abrir Ventanas-------------------------------------------------------------------------------------------------------------------------------------
+    @FXML
+    private void mostrarPantallaPrincipal(){
+        grpaccess.setVisible(false);
+        grpMenu.setVisible(true);
+        grpVentanaBienvenida.setVisible(true);
+        grpDatosUsuario.setVisible(true);
     }
 
     @FXML
@@ -214,6 +224,7 @@ public class Controller {
         grpaccess.setVisible(true);
     }
 
+    //Parte de TooltipsImagenes-----------------------------------------------------------------------------------------------------------------------------------
     @FXML
     private void mostrartooltipMatricula(){
         Tooltip.install(imgmatricula, new Tooltip("Realizar Proceso de Matriculacion"));
@@ -259,6 +270,120 @@ public class Controller {
         Tooltip.install(imgbuscar, new Tooltip("Buscar Asignaturas"));
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //funcion que recoge los datos del usuario
+    private String dataStudents(){
+        return newmodel.dataStudents(txtUser.getText(), txtpassword.getText());
+    }
+
+    //funcion que recoge los rellena los labels con los datos actualizados
+    @FXML
+    private void iniciarSesion(){
+        if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
+            mostrarPantallaPrincipal();
+            String[] withoutSpace = dataStudents().split("  ");
+            lblDni.setText(withoutSpace[0]);
+            lblNombre.setText(withoutSpace[1]);
+            lblApellidos.setText(withoutSpace[2]);
+            lblEdad.setText(withoutSpace[3]);
+            lblDireccion.setText(withoutSpace[4]);
+            lbltelefono.setText(withoutSpace[8]);
+            habilitarCampos();
+        }
+    }
+
+    //Parte Ventana Matricula-------------------------------------------------------------------------------------------------------------------------------------
+    //funcion para habilitar campos
+    public void habilitarCampos(){
+        if(newmodel.checkMatriculasCursadas(lblDni.getText())){
+            imgBaja.setDisable(false);
+            imgconvalidar.setDisable(false);
+            imgrenuncia.setDisable(false);
+        }
+        if(newmodel.checkCursosAprobados(lblDni.getText())){
+            imgtitulo.setDisable(false);
+        }
+    }
+
+    //funcion para rellenar un combobox de cursos
+    private void refillCursos(){
+        cmbList = new ArrayList<>();
+        newmodel.cmbListCursos(cmbList);
+        for(String str : cmbList){
+            cmbCursos.getItems().add(str);
+        }
+    }
+
+    //funcion que depende de los que hayamos hecho con la matricula, mostrmaos un mensaje u otro
+    @FXML
+    private void insertarMatricula(){
+        lblnombreCurso.setText(cmbCursos.getValue());
+        String resultado = "";
+        if(rbtnMañana.isSelected()){
+            resultado = getNivel(resultado, rbtnMañana);
+        } else if (rbtnTarde.isSelected()) {
+            resultado = getNivel(resultado, rbtnTarde);
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Debes selecionar un turno");
+            alert.showAndWait();
+        }
+
+        if(Objects.equals(resultado, "Aprobado")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Este curso ya lo tienes aprobado");
+            alert.showAndWait();
+        }else if(Objects.equals(resultado, "Actualizado") || Objects.equals(resultado, "Insertado")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("La matricula se ha realizado correctamente");
+            alert.showAndWait();
+        }else if(Objects.equals(resultado, "Cursando")){
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Ya estas en este curso");
+            alert.showAndWait();
+        }
+    }
+    //funcion que depende de que nivel se haya seleccionado realizamos la matricula con unos datos
+    private String getNivel(String resultado, RadioButton rbtnturno) {
+        if(rbtnPrimero.isSelected()){
+            resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 1);
+        }else if (rbtnSegundo.isSelected()){
+            resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 2);
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Debes selecionar un nivel");
+            alert.showAndWait();
+        }
+        return resultado;
+    }
+
+    //funcion abre la ventana de pagos, que depende de que ventana estaba abierta previamente envia unos datos u otros
+    @FXML
+    private void abrirventanaPagosMatricula(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/VentanaPagos.fxml"));
+            Parent root = fxmlLoader.load();
+            PagosController controller = fxmlLoader.getController();
+            if(grpVentanaMatricula.isVisible()){
+                controller.refillCampos(lblDni.getText(), "Matricula");
+            }else{
+                controller.refillCampos(lblDni.getText(), "Titulo");
+            }
+            controller.refillcantidadpago();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //Parte Ventana Convalidacion---------------------------------------------------------------------------------------------------------------------------------
     //funcion que abre una ventana con los datos buscados
     @FXML
     private void openSceneList(){
@@ -283,6 +408,7 @@ public class Controller {
             System.out.println(e.getMessage());
         }
     }
+
     //funcion que recoge los datos de la ventana de busqueda
     public void selectLine(String Asignaturas){
         lblidAsignatura.setText(Asignaturas);
@@ -296,35 +422,7 @@ public class Controller {
         }
     }
 
-    //funcion que recoge los datos del usuario
-    private String dataStudents(){
-        return newmodel.dataStudents(txtUser.getText(), txtpassword.getText());
-    }
-
-    //funcion que recoge los rellena los labels con los datos actualizados
-    @FXML
-    private void iniciarSesion(){
-        if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
-            mostrarPantallaPrincipal();
-            String[] withoutSpace = dataStudents().split("  ");
-            lblDni.setText(withoutSpace[0]);
-            lblNombre.setText(withoutSpace[1]);
-            lblApellidos.setText(withoutSpace[2]);
-            lblEdad.setText(withoutSpace[3]);
-            lblDireccion.setText(withoutSpace[4]);
-            lbltelefono.setText(withoutSpace[8]);
-
-        }
-    }
-    //funcion para rellenar un combobox de cursos
-    private void refillCursos(){
-        cmbList = new ArrayList<>();
-        newmodel.cmbListCursos(cmbList);
-        for(String str : cmbList){
-            cmbCursos.getItems().add(str);
-        }
-    }
-    //funcion que rellena los combox de las asignaturas
+    //funcion que rellena los combobox de las asignaturas
     private void refillAsignaturas(){
         cmbList = new ArrayList<>();
         newmodel.cmbListAsignaturasC(cmbList, lblnombreCurso.getText());
@@ -337,28 +435,38 @@ public class Controller {
             cmbAsig2.getItems().add(str);
         }
     }
-    //funcion que depende de los que hayamos hecho con la matricula, mostrmaos un mensaje u otro
+
+    //funcion que realiza la actualizacion de las notas(convalidacion) y abre la ventana de descargas
     @FXML
-    private void insertarMatricula(){
-        lblnombreCurso.setText(cmbCursos.getValue());
-        String resultado = newmodel.ckeckMatriculaCurso(lblDni.getText(), lblnombreCurso.getText());
-        if(Objects.equals(resultado, "Aprobado")){
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Este curso ya lo tienes aprobado");
-            alert.showAndWait();
-        }else if(Objects.equals(resultado, "Actualizado") || Objects.equals(resultado, "Insertado")){
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("La matricula se ha realizado correctamente");
-            alert.showAndWait();
-        }else if(Objects.equals(resultado, "Cursando")){
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Ya estas en este curso");
-            alert.showAndWait();
+    private void realizarConvalidacion(){
+        newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
+        openSceneDescargasConvalidar();
+    }
+
+    //funcion que abre la ventana de actualizacion Convalidacion
+    private void openSceneDescargasConvalidar(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DescargarDocumento.fxml"));
+            Parent root = fxmlLoader.load();
+            DescargarController controller = fxmlLoader.getController();
+            controller.cargarTextoConvalidar();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
+
+    //funcion que abre un explorador de archivos y guarda el nombre del archivo selecciona en un label
+    @FXML
+    private void subirFicheros(){
+        JFileChooser j = new JFileChooser();
+        j.showSaveDialog(null);
+        lblnombrefichero.setText(j.getSelectedFile().getName());
+    }
+
+    //Parte de Ventana Modificar usuarios-------------------------------------------------------------------------------------------------------------------------
     //funcion que nos abre la ventana de modificar usuario
     @FXML
     private void VentanaModificarUsuario(){
@@ -376,51 +484,17 @@ public class Controller {
             System.out.println(e.getMessage());
         }
     }
+
     //funcion que nos recoge los datos obtenidos de la ventana de modificacion
     public void ObtenerDatosAModificar(String datos){
         String[] withoutSpace = datos.split("  ");
         newmodel.actualizarUsuario(txtUser.getText(), withoutSpace[0], withoutSpace[1], withoutSpace[2], withoutSpace[3], withoutSpace[4], withoutSpace[5]);
     }
-    //funcion que realiza la actualizacion de las notas(convalidacion) y abre la ventana de descargas
-    @FXML
-    private void realizarConvalidacion(){
-        newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
-        openSceneDescargasConvalidar();
-    }
-    //funcion que abre la ventana de actualizacion
-    private void openSceneDescargasConvalidar(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DescargarDocumento.fxml"));
-            Parent root = fxmlLoader.load();
-            DescargarController controller = fxmlLoader.getController();
-            controller.cargarTextoConvalidar();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
 
-    @FXML
-    private void abrirventanaPagosMatricula(){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/VentanaPagos.fxml"));
-            Parent root = fxmlLoader.load();
-            PagosController controller = fxmlLoader.getController();
-            if(grpVentanaMatricula.isVisible()){
-                controller.refillCampos(lblDni.getText(), "Matricula");
-            }else{
-                controller.refillCampos(lblDni.getText(), "Titulo");
-            }
-            controller.refillcantidadpago();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
+
+
+
+
 
 
 }

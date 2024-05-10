@@ -13,7 +13,7 @@
     <mapping class="com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity"/>
     <mapping class="com.finalproject.agg2324.spinstitute.pojos.NotasEntity"/>
     <mapping class="com.finalproject.agg2324.spinstitute.pojos.AlumnosEntity"/>
-      <mapping class="com.finalproject.agg2324.spinstitute.pojos.PagosEntity"/>
+    <mapping class="com.finalproject.agg2324.spinstitute.pojos.PagosEntity"/>
 
       <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

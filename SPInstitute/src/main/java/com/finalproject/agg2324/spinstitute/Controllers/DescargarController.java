@@ -1,10 +1,9 @@
-package com.finalproject.agg2324.spinstitute;
+package com.finalproject.agg2324.spinstitute.Controllers;
 
+import com.finalproject.agg2324.spinstitute.Documentos;
 import javafx.fxml.FXML;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

@@ -13,7 +13,9 @@ public class MatriculaEntity {
     private int idCurso;
     private Date fechaMatricula;
     private boolean repetidor;
+    private String turno;
     private String estado;
+    private int nivel;
     private AlumnosEntity Dni;
     private CursosEntity idcursos;
 
@@ -83,23 +85,36 @@ public class MatriculaEntity {
         this.repetidor = repetidor;
     }
 
+
+    @Basic
+    @Column(name = "turno", nullable = false)
+    public String getTurno() {return turno;}
+
+    public void setTurno(String turno) {this.turno = turno;}
+
     @Basic
     @Column(name = "estado", nullable = false, length = 30)
     public String getEstado(){return estado;}
 
     public void setEstado(String estado){this.estado = estado;}
 
+    @Basic
+    @Column(name = "nivel", nullable = false)
+    public int getNivel(){return nivel;}
+
+    public void setNivel(int nivel){this.nivel = nivel;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MatriculaEntity that = (MatriculaEntity) o;
-        return repetidor == that.repetidor && Objects.equals(idMatricula, that.idMatricula) && Objects.equals(dni, that.dni) && Objects.equals(idCurso, that.idCurso) && Objects.equals(fechaMatricula, that.fechaMatricula);
+        return repetidor == that.repetidor && Objects.equals(idMatricula, that.idMatricula) && Objects.equals(dni, that.dni) && Objects.equals(idCurso, that.idCurso) && Objects.equals(fechaMatricula, that.fechaMatricula)  && Objects.equals(nivel, that.nivel)  && Objects.equals(turno, that.turno);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idMatricula, dni, idCurso, fechaMatricula, repetidor);
+        return Objects.hash(idMatricula, dni, idCurso, fechaMatricula, repetidor, turno, nivel);
     }
 
     @ManyToOne

@@ -1,4 +1,4 @@
-package com.finalproject.agg2324.spinstitute;
+package com.finalproject.agg2324.spinstitute.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -6,9 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.apache.commons.lang3.StringUtils;
 
-import java.awt.event.ActionEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

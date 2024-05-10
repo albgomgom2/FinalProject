@@ -2,7 +2,6 @@ package com.finalproject.agg2324.spinstitute.pojos;
 
 import jakarta.persistence.*;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
@@ -52,7 +51,7 @@ public class NotasEntity {
     }
 
     @Basic
-    @Column(name = "nota1", nullable = true, precision = 0)
+    @Column(name = "nota1")
     public int getNota1() {
         return nota1;
     }
@@ -62,7 +61,7 @@ public class NotasEntity {
     }
 
     @Basic
-    @Column(name = "nota2", nullable = true, precision = 0)
+    @Column(name = "nota2")
     public int getNota2() {
         return nota2;
     }
@@ -72,7 +71,7 @@ public class NotasEntity {
     }
 
     @Basic
-    @Column(name = "nota3", nullable = true, precision = 0)
+    @Column(name = "nota3")
     public int getNota3() {
         return nota3;
     }
@@ -82,7 +81,7 @@ public class NotasEntity {
     }
 
     @Basic
-    @Column(name = "notafinal", nullable = true, precision = 0)
+    @Column(name = "notafinal")
     public int getNotafinal() {
         return notafinal;
     }
