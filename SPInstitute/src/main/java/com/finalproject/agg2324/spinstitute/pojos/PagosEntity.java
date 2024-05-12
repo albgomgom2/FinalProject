@@ -2,67 +2,103 @@ package com.finalproject.agg2324.spinstitute.pojos;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Pagos", schema = "public", catalog = "VTInstitute")
+@Table(name = "\"Pagos\"", schema = "public", catalog = "VTInstitute")
 public class PagosEntity {
-    private int idPagos;
-    private String dni;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "idpago", nullable = false)
+    private Integer idpago;
+    @Basic
+    @Column(name = "cuenta", nullable = false, length = 50)
     private String cuenta;
-    private double cantidad;
+    @Basic
+    @Column(name = "cantidad", nullable = false, precision = 0)
+    private BigInteger cantidad;
+    @Basic
+    @Column(name = "operacion", nullable = false, length = 20)
     private String operacion;
-    private AlumnosEntity dnis;
+    @Basic
+    @Column(name = "idalumno", nullable = false)
+    private Integer idalumno;
+    @ManyToOne
+    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
+    private StudentsEntity alumnos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idpago", nullable = false)
-    public int getIdPagos() {return idPagos;}
+    public Integer getIdpago() {
+        return idpago;
+    }
 
-    public void setIdPagos(int idPagos) {this.idPagos = idPagos;}
-
-    @Basic
-    @Column(name = "dni", nullable = false, length = 9)
-    public String getDni() {return dni;}
-
-    public void setDni(String dni) {this.dni = dni;}
+    public void setIdpago(Integer idpago) {
+        this.idpago = idpago;
+    }
 
     @Basic
-    @Column(name = "cuenta", nullable = false, length = 1)
-    public String getCuenta() {return cuenta;}
+    @Column(name = "cuenta", nullable = false, length = 50)
+    public String getCuenta() {
+        return cuenta;
+    }
 
-    public void setCuenta(String cuenta) {this.cuenta = cuenta;}
-
-    @Basic
-    @Column(name = "cantidad", nullable = false)
-    public double getCantidad() {return cantidad;}
-
-    public void setCantidad(double cantidad) {this.cantidad = cantidad;}
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
 
     @Basic
-    @Column(name = "Operacion", nullable = false, length = 10)
-    public String getOperacion() {return operacion;}
+    @Column(name = "cantidad", nullable = false, precision = 0)
+    public BigInteger getCantidad() {
+        return cantidad;
+    }
 
-    public void setOperacion(String operacion) {this.operacion = operacion;}
+    public void setCantidad(BigInteger cantidad) {
+        this.cantidad = cantidad;
+    }
 
+    @Basic
+    @Column(name = "operacion", nullable = false, length = 20)
+    public String getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(String operacion) {
+        this.operacion = operacion;
+    }
+
+    @Basic
+    @Column(name = "idalumno", nullable = false)
+    public Integer getIdalumno() {
+        return idalumno;
+    }
+
+    public void setIdalumno(Integer idalumno) {
+        this.idalumno = idalumno;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PagosEntity that = (PagosEntity) o;
-        return Objects.equals(idPagos, that.idPagos) && Objects.equals(dni, that.dni) && Objects.equals(cuenta, that.cuenta) && Objects.equals(operacion, that.operacion);
+        return Objects.equals(idpago, that.idpago) && Objects.equals(cuenta, that.cuenta) && Objects.equals(cantidad, that.cantidad) && Objects.equals(operacion, that.operacion) && Objects.equals(idalumno, that.idalumno);
     }
 
     @Override
-    public int hashCode() {return Objects.hash(idPagos, dni, cuenta, operacion);}
+    public int hashCode() {
+        return Objects.hash(idpago, cuenta, cantidad, operacion, idalumno);
+    }
 
     @ManyToOne
-    @JoinColumn(name = "Dni", nullable = false, insertable = false, updatable = false, referencedColumnName = "dni")
-    public AlumnosEntity getAlumno() {return dnis;}
+    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false, insertable = false,updatable = false)
+    public StudentsEntity getAlumnos() {
+        return alumnos;
+    }
 
-    public void setDnis(AlumnosEntity dnis) {
-        this.dnis = dnis;
+    public void setAlumnos(StudentsEntity alumnos) {
+        this.alumnos = alumnos;
     }
 }

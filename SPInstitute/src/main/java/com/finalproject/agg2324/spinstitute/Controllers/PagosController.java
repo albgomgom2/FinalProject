@@ -41,7 +41,7 @@ public class PagosController {
         if(!cmbcantidadpago.getValue().isEmpty()){
             String list = cmbcantidadpago.getSelectionModel().getSelectedItem();
             String[] withoutSpace = list.split("  ");
-            newmodel.insertarPago(txtdni.getText(), txtoperacion.getText(), txtcuenta.getText(), Double.parseDouble(withoutSpace[0]));
+           // newmodel.insertarPago(txtdni.getText(), txtoperacion.getText(), txtcuenta.getText(), Integer.parseInt(withoutSpace[0]));
         }
 
     }

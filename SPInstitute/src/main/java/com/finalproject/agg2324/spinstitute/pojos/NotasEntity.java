@@ -2,135 +2,163 @@ package com.finalproject.agg2324.spinstitute.pojos;
 
 import jakarta.persistence.*;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Notas", schema = "public", catalog = "VTInstitute")
+@Table(name = "\"Notas\"", schema = "public", catalog = "VTInstitute")
 public class NotasEntity {
-    private int idNotas;
-    private String dni;
-    private int asignatura;
-    private int nota1;
-    private int nota2;
-    private int nota3;
-    private int notafinal;
-    private boolean activo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id_notas", nullable = false)
+    private Integer idNotas;
+    @Basic
+    @Column(name = "nota1", nullable = true, precision = 0)
+    private BigInteger nota1;
+    @Basic
+    @Column(name = "nota2", nullable = true, precision = 0)
+    private BigInteger nota2;
+    @Basic
+    @Column(name = "nota3", nullable = true, precision = 0)
+    private BigInteger nota3;
+    @Basic
+    @Column(name = "notafinal", nullable = true, precision = 0)
+    private BigInteger notafinal;
+    @Basic
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+    @Basic
+    @Column(name = "estado", nullable = false, length = 30)
     private String estado;
-    private AlumnosEntity dnis;
+    @Basic
+    @Column(name = "asignatura", nullable = false)
+    private Integer asignatura;
+    @Basic
+    @Column(name = "idalumno", nullable = false)
+    private Integer idalumno;
+    @ManyToOne
+    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
+    private StudentsEntity alumnos;
+    @ManyToOne
+    @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false)
     private AsignaturasEntity asignaturas;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "Id_notas", nullable = false)
-    public int getIdNotas() {
+    @Column(name = "id_notas", nullable = false)
+    public Integer getIdNotas() {
         return idNotas;
     }
 
-    public void setIdNotas(int idNotas) {
+    public void setIdNotas(Integer idNotas) {
         this.idNotas = idNotas;
     }
 
     @Basic
-    @Column(name = "Dni", nullable = false, length = 9)
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    @Basic
-    @Column(name = "Asignatura", nullable = false, length = 10)
-    public int getAsignatura() {
-        return asignatura;
-    }
-
-    public void setAsignatura(int asignatura) {
-        this.asignatura = asignatura;
-    }
-
-    @Basic
-    @Column(name = "nota1")
-    public int getNota1() {
+    @Column(name = "nota1", nullable = true, precision = 0)
+    public BigInteger getNota1() {
         return nota1;
     }
 
-    public void setNota1(int nota1) {
+    public void setNota1(BigInteger nota1) {
         this.nota1 = nota1;
     }
 
     @Basic
-    @Column(name = "nota2")
-    public int getNota2() {
+    @Column(name = "nota2", nullable = true, precision = 0)
+    public BigInteger getNota2() {
         return nota2;
     }
 
-    public void setNota2(int nota2) {
+    public void setNota2(BigInteger nota2) {
         this.nota2 = nota2;
     }
 
     @Basic
-    @Column(name = "nota3")
-    public int getNota3() {
+    @Column(name = "nota3", nullable = true, precision = 0)
+    public BigInteger getNota3() {
         return nota3;
     }
 
-    public void setNota3(int nota3) {
+    public void setNota3(BigInteger nota3) {
         this.nota3 = nota3;
     }
 
     @Basic
-    @Column(name = "notafinal")
-    public int getNotafinal() {
+    @Column(name = "notafinal", nullable = true, precision = 0)
+    public BigInteger getNotafinal() {
         return notafinal;
     }
 
-    public void setNotafinal(int notafinal) {
+    public void setNotafinal(BigInteger notafinal) {
         this.notafinal = notafinal;
     }
 
     @Basic
     @Column(name = "activo", nullable = false)
-    public boolean isActivo() {
+    public Boolean getActivo() {
         return activo;
     }
 
-    public void setActivo(boolean activo) {
+    public void setActivo(Boolean activo) {
         this.activo = activo;
     }
 
     @Basic
     @Column(name = "estado", nullable = false, length = 30)
-    public String getEstado(){return estado;}
+    public String getEstado() {
+        return estado;
+    }
 
-    public void setEstado(String estado){this.estado = estado;}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    @Basic
+    @Column(name = "asignatura", nullable = false)
+    public Integer getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(Integer asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    @Basic
+    @Column(name = "idalumno", nullable = false)
+    public Integer getIdalumno() {
+        return idalumno;
+    }
+
+    public void setIdalumno(Integer idalumno) {
+        this.idalumno = idalumno;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NotasEntity that = (NotasEntity) o;
-        return activo == that.activo && Objects.equals(idNotas, that.idNotas) && Objects.equals(dni, that.dni) && Objects.equals(asignatura, that.asignatura) && Objects.equals(nota1, that.nota1) && Objects.equals(nota2, that.nota2) && Objects.equals(nota3, that.nota3) && Objects.equals(notafinal, that.notafinal);
+        return Objects.equals(idNotas, that.idNotas) && Objects.equals(nota1, that.nota1) && Objects.equals(nota2, that.nota2) && Objects.equals(nota3, that.nota3) && Objects.equals(notafinal, that.notafinal) && Objects.equals(activo, that.activo) && Objects.equals(estado, that.estado) && Objects.equals(asignatura, that.asignatura) && Objects.equals(idalumno, that.idalumno);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idNotas, dni, asignatura, nota1, nota2, nota3, notafinal, activo);
+        return Objects.hash(idNotas, nota1, nota2, nota3, notafinal, activo, estado, asignatura, idalumno);
     }
 
     @ManyToOne
-    @JoinColumn(name = "Dni", referencedColumnName = "Dni", nullable = false, insertable = false, updatable = false)
-    public AlumnosEntity getDnis() {
-        return dnis;
+    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false, insertable = false,updatable = false)
+    public StudentsEntity getAlumnos() {
+        return alumnos;
     }
 
-    public void setDnis(AlumnosEntity dnis) {
-        this.dnis = dnis;
+    public void setAlumnos(StudentsEntity alumnos) {
+        this.alumnos = alumnos;
     }
 
     @ManyToOne
-    @JoinColumn(name = "Asignatura", nullable = false, insertable = false, updatable = false, referencedColumnName = "id_asignaturas")
+    @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false, insertable = false,updatable = false)
     public AsignaturasEntity getAsignaturas() {
         return asignaturas;
     }

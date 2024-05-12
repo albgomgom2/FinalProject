@@ -3,33 +3,47 @@ package com.finalproject.agg2324.spinstitute.pojos;
 import jakarta.persistence.*;
 
 import java.math.BigInteger;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "Cursos", schema = "public", catalog = "VTInstitute")
+@Table(name = "\"Cursos\"", schema = "public", catalog = "VTInstitute")
 public class CursosEntity {
-    private int idCurso;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id_curso", nullable = false)
+    private Integer idCurso;
+    @Basic
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
+    @Basic
+    @Column(name = "abreviatura", nullable = false, length = 10)
     private String abreviatura;
+    @Basic
+    @Column(name = "aula", nullable = false, length = 10)
     private String aula;
-    private int turno;
-    private List<MatriculaEntity> matriculas;
-    private List<AsignaturasEntity> idasignaturas;
+    @Basic
+    @Column(name = "turno", nullable = false, precision = 0)
+    private BigInteger turno;
+    @OneToMany(mappedBy = "cursos")
+    private Set<MatriculaEntity> matriculas;
+    @ManyToMany
+    @JoinTable(name = "Asignaturas_Cursos", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false), inverseJoinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false))
+    private Set<AsignaturasEntity> asignaturas;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "Id_Curso", nullable = false, length = 10)
-    public int getIdCurso() {
+    @Column(name = "id_curso", nullable = false)
+    public Integer getIdCurso() {
         return idCurso;
     }
 
-    public void setIdCurso(int idCurso) {
+    public void setIdCurso(Integer idCurso) {
         this.idCurso = idCurso;
     }
 
     @Basic
-    @Column(name = "Nombre", nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     public String getNombre() {
         return nombre;
     }
@@ -39,7 +53,7 @@ public class CursosEntity {
     }
 
     @Basic
-    @Column(name = "Abreviatura", nullable = false, length = 10)
+    @Column(name = "abreviatura", nullable = false, length = 10)
     public String getAbreviatura() {
         return abreviatura;
     }
@@ -49,7 +63,7 @@ public class CursosEntity {
     }
 
     @Basic
-    @Column(name = "Aula", nullable = false, length = 10)
+    @Column(name = "aula", nullable = false, length = 10)
     public String getAula() {
         return aula;
     }
@@ -60,39 +74,42 @@ public class CursosEntity {
 
     @Basic
     @Column(name = "turno", nullable = false, precision = 0)
-    public int getTurno(){return turno;}
+    public BigInteger getTurno() {
+        return turno;
+    }
 
-    public void setTurno(int turno){this.turno = turno;}
+    public void setTurno(BigInteger turno) {
+        this.turno = turno;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CursosEntity that = (CursosEntity) o;
-        return Objects.equals(idCurso, that.idCurso) && Objects.equals(nombre, that.nombre) && Objects.equals(abreviatura, that.abreviatura) && Objects.equals(aula, that.aula);
+        return Objects.equals(idCurso, that.idCurso) && Objects.equals(nombre, that.nombre) && Objects.equals(abreviatura, that.abreviatura) && Objects.equals(aula, that.aula) && Objects.equals(turno, that.turno);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCurso, nombre, abreviatura, aula);
+        return Objects.hash(idCurso, nombre, abreviatura, aula, turno);
     }
 
-    @OneToMany(mappedBy = "idcursos")
-    public List<MatriculaEntity> getMatriculas() {
+    @OneToMany(mappedBy = "cursos")
+    public Set<MatriculaEntity> getMatriculas() {
         return matriculas;
     }
 
-    public void setMatriculas(List<MatriculaEntity> matriculas) {
+    public void setMatriculas(Set<MatriculaEntity> matriculas) {
         this.matriculas = matriculas;
     }
 
-    @ManyToMany
-    @JoinTable(name = "Asignaturas_Cursos", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "Id_Curso", nullable = false), inverseJoinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false))
-    public List<AsignaturasEntity> getIdasignaturas() {
-        return idasignaturas;
+    @ManyToMany(mappedBy = "cursos")
+    public Set<AsignaturasEntity> getAsignaturas() {
+        return asignaturas;
     }
 
-    public void setIdasignaturas(List<AsignaturasEntity> idasignaturas) {
-        this.idasignaturas = idasignaturas;
+    public void setAsignaturas(Set<AsignaturasEntity> asignaturas) {
+        this.asignaturas = asignaturas;
     }
 }

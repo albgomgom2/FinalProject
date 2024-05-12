@@ -279,16 +279,21 @@ public class Controller {
     //funcion que recoge los rellena los labels con los datos actualizados
     @FXML
     private void iniciarSesion(){
-        if(newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
+        if(!newmodel.checkUserAndPassword(txtUser.getText(), txtpassword.getText())){
             mostrarPantallaPrincipal();
-            String[] withoutSpace = dataStudents().split("  ");
+            /*String[] withoutSpace = dataStudents().split("  ");
             lblDni.setText(withoutSpace[0]);
             lblNombre.setText(withoutSpace[1]);
             lblApellidos.setText(withoutSpace[2]);
             lblEdad.setText(withoutSpace[3]);
             lblDireccion.setText(withoutSpace[4]);
-            lbltelefono.setText(withoutSpace[8]);
+            lbltelefono.setText(withoutSpace[8]);*/
             habilitarCampos();
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Usuario o contraseña incorrectos");
+            alert.showAndWait();
         }
     }
 
@@ -350,9 +355,9 @@ public class Controller {
     //funcion que depende de que nivel se haya seleccionado realizamos la matricula con unos datos
     private String getNivel(String resultado, RadioButton rbtnturno) {
         if(rbtnPrimero.isSelected()){
-            resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 1);
+            //resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 1);
         }else if (rbtnSegundo.isSelected()){
-            resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 2);
+           // resultado = newmodel.checkMatriculaCurso(lblDni.getText(), lblnombreCurso.getText(), rbtnturno.getText(), 2);
         }else{
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -392,13 +397,13 @@ public class Controller {
             Parent root = fxmlLoader.load();
             ElegirController elegir = fxmlLoader.getController();
             if(grpVentanaConvalidar.isVisible()){
-                elegir.refillList(newmodel.selectAsignaturas(lblDni.getText()));
+                //elegir.refillList(newmodel.selectAsignaturas(lblDni.getText()));
                 elegir.setParentController(this);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
             }else if(grpVentanaRenuncia.isVisible()){
-                elegir.refillList(newmodel.selectAsignaturasFiltradasPorEstado(lblDni.getText()));
+               // elegir.refillList(newmodel.selectAsignaturasFiltradasPorEstado(lblDni.getText()));
                 elegir.setParentController(this);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
@@ -410,7 +415,7 @@ public class Controller {
     }
 
     //funcion que recoge los datos de la ventana de busqueda
-    public void selectLine(String Asignaturas){
+    /*public void selectLine(String Asignaturas){
         lblidAsignatura.setText(Asignaturas);
         if(newmodel.convalidarAsignatura(lblDni.getText(),Asignaturas)){
             lvasignaturas.getItems().add(Asignaturas);
@@ -420,7 +425,7 @@ public class Controller {
             alert.setContentText("La asignatura " + lblidAsignatura.getText() + " no se puede convalidar, no cumples los requisitos");
             alert.showAndWait();
         }
-    }
+    }*/
 
     //funcion que rellena los combobox de las asignaturas
     private void refillAsignaturas(){
@@ -430,7 +435,7 @@ public class Controller {
             cmbAsignaturas.getItems().add(str);
         }
         cmbList = new ArrayList<>();
-        newmodel.cmbListAsignaturasR(cmbList, lblnombreCurso.getText(), lblDni.getText());
+        //newmodel.cmbListAsignaturasR(cmbList, lblnombreCurso.getText(), lblDni.getText());
         for (String str : cmbList){
             cmbAsig2.getItems().add(str);
         }
@@ -439,7 +444,7 @@ public class Controller {
     //funcion que realiza la actualizacion de las notas(convalidacion) y abre la ventana de descargas
     @FXML
     private void realizarConvalidacion(){
-        newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
+        //newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
         openSceneDescargasConvalidar();
     }
 

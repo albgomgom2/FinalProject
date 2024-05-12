@@ -48,19 +48,19 @@
       <version>6.4.0.Final</version>
     </dependency>
     <dependency>
-      <groupId>com.vaadin.external.google</groupId>
-      <artifactId>android-json</artifactId>
-      <version>0.0.20131108.vaadin1</version>
+      <groupId>net.bytebuddy</groupId>
+      <artifactId>byte-buddy</artifactId>
+      <version>1.14.15</version>
     </dependency>
     <dependency>
-      <groupId>org.hibernate.orm.tooling</groupId>
-      <artifactId>hibernate-enhance-maven-plugin</artifactId>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-core</artifactId>
       <version>6.5.0.Final</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.12.0</version>
+      <groupId>com.vaadin.external.google</groupId>
+      <artifactId>android-json</artifactId>
+      <version>0.0.20131108.vaadin1</version>
     </dependency>
   </dependencies>
   <build>
