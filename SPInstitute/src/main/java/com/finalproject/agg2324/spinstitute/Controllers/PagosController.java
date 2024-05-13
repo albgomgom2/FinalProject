@@ -23,7 +23,6 @@ public class PagosController {
     public void refillcantidadpago() {
         if(txtoperacion.getText().equals("Matricula")){
             cmbcantidadpago.getItems().clear();
-
             cmbcantidadpago.getItems().add("");
             cmbcantidadpago.getItems().add("");
         }else{

@@ -104,13 +104,13 @@ public class Controller {
 
 
     model newmodel = new model();
+
     //funcion para salir de la aplicacionn
     @FXML
     private void Salir(){
         alertA.setTitle("Attention");
         alertA.setHeaderText("Confirmation: ");
-        alertA.setContentText("do you want to exit the application ?");
-
+        alertA.setContentText("Deseas Salir de la Aplicacion ?");
         alertA.showAndWait();
         if(alertA.getResult().equals(ButtonType.OK)){
             System.exit(0);
@@ -350,7 +350,6 @@ public class Controller {
             alert.setContentText("Debes selecionar un turno");
             alert.showAndWait();
         }
-
         if(Objects.equals(resultado, "Aprobado")){
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -375,7 +374,6 @@ public class Controller {
         }
         limpiarCamposMatricula();
     }
-
 
     //funcion abre la ventana de pagos, que depende de que ventana estaba abierta previamente envia unos datos u otros
     private void abrirventanaPagosMatricula(){

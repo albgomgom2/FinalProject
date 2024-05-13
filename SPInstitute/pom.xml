@@ -13,7 +13,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>5.9.2</junit.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -80,7 +79,6 @@
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
               <mainClass>com.finalproject.agg2324.spinstitute/com.finalproject.agg2324.spinstitute.Application</mainClass>

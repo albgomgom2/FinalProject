@@ -122,30 +122,35 @@ public class ModificarController {
         Matcher m = p.matcher(txtMDireccion.getText());
         return m.matches();
     }
+
     //funcion para validar una ciudad
     private boolean validarCiudad(){
         Pattern p = Pattern.compile("^[a-zA-Z ]{1,30}");
         Matcher m = p.matcher(txtMCiudad.getText());
         return m.matches();
     }
+
     //funcion para validar una localidad
     private boolean validarLocalidad(){
         Pattern p = Pattern.compile("^[a-zA-Z ]{1,30}");
         Matcher m = p.matcher(txtMLocalidad.getText());
         return m.matches();
     }
+
     //funcion para validar un telefono
     private boolean validarTelefono(){
         Pattern p = Pattern.compile("^(\\+34|0034|34)?[6789]\\d{8}$");
         Matcher m = p.matcher(txtMTelefono.getText());
         return m.matches();
     }
+
     //funcion para validar un email
     private boolean validarEmail(){
         Pattern p = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$");
         Matcher m = p.matcher(txtMEmail.getText());
         return m.matches();
     }
+
     //funcion para validar una contraseña
     private boolean validarContraseña(){
         if(txtMContraseña.getText().length() > 8){
@@ -176,12 +181,12 @@ public class ModificarController {
                     especial = true;
                 }
             }
-
             return numero && letraoSimbolo && especial && mayuscula;
         }else{
             return false;
         }
     }
+
     //funcion que me recoge los datos en un string
     private String modificarDatosController(){
         return txtMDireccion.getText() + "  " + txtMLocalidad.getText() + "  " + txtMCiudad.getText() + "  " + txtMTelefono.getText() + "  " + txtMEmail.getText() + "  " + txtMContraseña.getText();

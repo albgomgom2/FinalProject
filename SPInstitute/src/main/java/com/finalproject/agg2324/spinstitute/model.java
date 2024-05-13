@@ -109,7 +109,6 @@ public class model {
                     return "Cursando";
                 }
             }
-
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -198,7 +197,6 @@ public class model {
                 session.save(notas);
                 transaction.commit();
             }
-
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -299,7 +297,6 @@ public class model {
             }else{
                 return false;
             }
-
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -340,7 +337,6 @@ public class model {
                 session.update(notas);
                 transaction.commit();
             }
-
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

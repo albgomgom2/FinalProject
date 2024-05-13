@@ -37,6 +37,7 @@ public class DescargarController {
             JOptionPane.showMessageDialog(null, "Error al guardar, en la salida");
         }
     }
+
     //funcion que guarda el documento en una ruta elegida
     @FXML
     private void guardarComo(){
@@ -51,16 +52,18 @@ public class DescargarController {
         Stage stage = (Stage) n.getScene().getWindow();
         stage.close();
     }
-    //funcion para cargar el texto del titulo
+
+    //funcion para cargar el texto del título
     public void cargarTextoTitulo(){
         txtadoc.setText(doc.documentoTitulo());
     }
+
     //funcion para cargar el texto de la renuncia
     public void cargarTextoRenuncia(){
         txtadoc.setText(doc.documentoRenuncia());
     }
 
-    //funcion para cargar el texto de la convalidacion
+    //funcion para cargar el texto de la convalidación
     public void cargarTextoConvalidar(){
         txtadoc.setText(doc.documentoConvalidar());
     }
@@ -70,8 +73,13 @@ public class DescargarController {
         txtadoc.setText(doc.documentoBaja());
     }
 
-    //funcion para cargar el texto de la matricula
+    //funcion para cargar el texto de la matrícula
     public void cargarTextoMatricula(){
         txtadoc.setText(doc.documentoMatricula());
+    }
+
+    //funcion que cargue un documento en el textarea
+    public void cargarTextoDocumento(File archivo){
+
     }
 }

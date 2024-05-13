@@ -11,9 +11,7 @@ public class Documentos {
         return "Texto de renuncia de Pruebas";
     }
 
-    public String documentoConvalidar(){
-        return "Texto de convalidar de Pruebas";
-    }
+    public String documentoConvalidar(){return "Texto de convalidar de Pruebas";}
 
     public String documentoMatricula(){
         return "Texto de matricula de Pruebas";
