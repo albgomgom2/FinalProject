@@ -118,7 +118,7 @@ public class ModificarController {
 
     //funcion para validar una direccion
     private boolean validarDireccion(){
-        Pattern p = Pattern.compile("^(Calle|Carrera|Diagonal)\\s\\d{2}\\s#\\d{2}-\\d{2}\\s[a-zA-Z\\s]+$");
+        Pattern p = Pattern.compile("^[a-zA-Z0-9 ]{1,200}");
         Matcher m = p.matcher(txtMDireccion.getText());
         return m.matches();
     }
@@ -142,7 +142,7 @@ public class ModificarController {
     }
     //funcion para validar un email
     private boolean validarEmail(){
-        Pattern p = Pattern.compile("^[\\w-+]+(\\.[\\w-]{1,62}){0,126}@[\\w-]{1,63}(\\.[\\w-]{1,62})+/[\\w-]+$");
+        Pattern p = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$");
         Matcher m = p.matcher(txtMEmail.getText());
         return m.matches();
     }

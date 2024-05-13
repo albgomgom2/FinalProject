@@ -28,7 +28,7 @@ public class ElegirController {
     public void getOptionSelected(ActionEvent actionEvent){
         if(!lvlists.getItems().isEmpty()){
             String list = lvlists.getSelectionModel().getSelectedItem();
-           // controller.selectLine(list);
+            controller.selectLine(list);
         }
         Node n = (Node) actionEvent.getSource();
         Stage stage = (Stage) n.getScene().getWindow();

@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "\"Matricula\"", schema = "public", catalog = "VTInstitute")
+@Table(name = "\"Matriculas\"", schema = "public", catalog = "VTInstitute")
 public class MatriculaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -33,7 +33,8 @@ public class MatriculaEntity {
     @Basic
     @Column(name = "idalumno", nullable = false)
     private Integer idalumno;
-    @OneToOne(mappedBy = "matriculas")
+    @ManyToOne
+    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
     private StudentsEntity alumnos;
     @ManyToOne
     @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false)
@@ -133,7 +134,7 @@ public class MatriculaEntity {
         return Objects.hash(idMatricula, repetidor, estado, fechamatricula, idcurso, nivel, turno, idalumno);
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false, insertable = false,updatable = false)
     public StudentsEntity getAlumnos() {
         return alumnos;

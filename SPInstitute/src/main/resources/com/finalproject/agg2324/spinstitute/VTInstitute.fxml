@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controllers.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controllers.Controller">
    <children>
       <GridPane fx:id="grpaccess" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
          <columnConstraints>
@@ -89,7 +89,7 @@
                   <Image url="@../../../../images/cerrar-sesion.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <ImageView fx:id="imgeditar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#VentanaModificarUsuario" onMouseEntered="#mostrartooltipEditar" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="5.0" top="10.0" />
                </GridPane.margin>
@@ -103,6 +103,7 @@
                   <Insets bottom="15.0" left="10.0" />
                </GridPane.margin>
             </Label>
+            <Label fx:id="lblcontra" text="Label" visible="false" />
          </children>
       </GridPane>
       <GridPane fx:id="grpMenu" layoutY="322.0" prefHeight="80.0" prefWidth="600.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
@@ -118,27 +119,27 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fx:id="imgBaja" disable="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaBaja" onMouseEntered="#mostrartooltipBaja" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgBaja" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#abrirVentanaBaja" onMouseEntered="#mostrartooltipBaja" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../images/darse-de-baja.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgmatricula" cache="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaMatricula" onMouseEntered="#mostrartooltipMatricula" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="imgmatricula" cache="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#ventanaMatricula" onMouseEntered="#mostrartooltipMatricula" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@../../../../images/tesis.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgconvalidar" disable="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaConvalidar" onMouseEntered="#mostrartooltipConvalidar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="imgconvalidar" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#abrirVentanaConvalidacion" onMouseEntered="#mostrartooltipConvalidar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../../../../images/aprobado.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgrenuncia" disable="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaRenuncia" onMouseEntered="#mostrartooltipRenuncia" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fx:id="imgrenuncia" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#abrirVentanaRenuncia" onMouseEntered="#mostrartooltipRenuncia" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@../../../../images/disposicion.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="imgtitulo" disable="true" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#mostrarVentanaTitulo" onMouseEntered="#mostrartooltipTitulo" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+            <ImageView fx:id="imgtitulo" fitHeight="70.0" fitWidth="70.0" onMouseClicked="#abrirVentanaTitulo" onMouseEntered="#mostrartooltipTitulo" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@../../../../images/titulo-universitario.png" />
                </image>
@@ -183,41 +184,34 @@
                   <Insets left="15.0" top="35.0" />
                </GridPane.margin>
             </Label>
-            <RadioButton fx:id="rbtnMañana" disable="true" mnemonicParsing="false" text="Mañana" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="80.0" top="110.0" />
-               </GridPane.margin>
-            </RadioButton>
             <Label text="Turno: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="100.0" top="80.0" />
+                  <Insets left="15.0" top="100.0" />
                </GridPane.margin>
             </Label>
-            <RadioButton fx:id="rbtnTarde" disable="true" layoutX="26.0" layoutY="111.0" mnemonicParsing="false" text="Tarde">
+            <Label layoutX="41.0" layoutY="91.0" text="Nivel: " GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets bottom="40.0" left="80.0" />
-               </GridPane.margin>
-            </RadioButton>
-            <Label layoutX="41.0" layoutY="91.0" text="Nivel: " GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets right="100.0" top="80.0" />
+                  <Insets left="15.0" top="20.0" />
                </GridPane.margin>
             </Label>
-            <RadioButton fx:id="rbtnPrimero" disable="true" layoutX="26.0" layoutY="121.0" mnemonicParsing="false" text="Primero" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets right="86.0" top="110.0" />
-               </GridPane.margin>
-            </RadioButton>
-            <RadioButton fx:id="rbtnSegundo" disable="true" layoutX="339.0" layoutY="121.0" mnemonicParsing="false" text="Segundo" GridPane.halignment="RIGHT">
-               <GridPane.margin>
-                  <Insets bottom="40.0" right="80.0" />
-               </GridPane.margin>
-            </RadioButton>
-            <Button fx:id="btnAcept" mnemonicParsing="false" prefHeight="39.0" prefWidth="84.0" text="ACEPTAR" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#insertarMatricula" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" />
                </GridPane.margin>
-            </Button>
+               <image>
+                  <Image url="@../../../../images/aprobar.png" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="cmbturno" prefHeight="25.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="15.0" top="95.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox fx:id="cmbnivel" prefWidth="279.0" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="15.0" top="15.0" />
+               </GridPane.margin>
+            </ComboBox>
          </children>
       </GridPane>
       <GridPane fx:id="grpVentanaBaja" layoutX="194.0" prefHeight="322.0" prefWidth="408.0" style="-fx-background-color: FFB96F; -fx-border-color: black;" visible="false">

@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.math.BigInteger;
+
 public class PagosController {
     @FXML
     private ComboBox<String> cmbcantidadpago;
@@ -41,7 +43,7 @@ public class PagosController {
         if(!cmbcantidadpago.getValue().isEmpty()){
             String list = cmbcantidadpago.getSelectionModel().getSelectedItem();
             String[] withoutSpace = list.split("  ");
-           // newmodel.insertarPago(txtdni.getText(), txtoperacion.getText(), txtcuenta.getText(), Integer.parseInt(withoutSpace[0]));
+            newmodel.insertarPago(txtdni.getText(), txtoperacion.getText(), txtcuenta.getText(), BigInteger.valueOf(Integer.parseInt(withoutSpace[0])));
         }
 
     }

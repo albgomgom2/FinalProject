@@ -56,9 +56,8 @@ public class StudentsEntity {
     @Basic
     @Column(name = "dni", nullable = false, length = 9)
     private String dni;
-    @OneToOne
-    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
-    private MatriculaEntity matriculas;
+    @OneToMany(mappedBy = "alumnos")
+    private Set<MatriculaEntity> matriculas;
     @OneToMany(mappedBy = "alumnos")
     private Set<PagosEntity> pagos;
     @OneToMany(mappedBy = "alumnos")
@@ -228,12 +227,12 @@ public class StudentsEntity {
         return Objects.hash(nombre, apellidos, edad, direccion, localidad, ciudad, pais, activo, telefono, email, date, usuario, contrasenya, idalumno, dni);
     }
 
-    @OneToOne(mappedBy = "alumnos")
-    public MatriculaEntity getMatriculas() {
+    @OneToMany(mappedBy = "alumnos")
+    public Set<MatriculaEntity> getMatriculas() {
         return matriculas;
     }
 
-    public void setMatriculas(MatriculaEntity matriculas) {
+    public void setMatriculas(Set<MatriculaEntity> matriculas) {
         this.matriculas = matriculas;
     }
 
