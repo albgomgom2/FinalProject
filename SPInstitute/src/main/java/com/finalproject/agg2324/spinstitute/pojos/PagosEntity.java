@@ -8,24 +8,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "\"Pagos\"", schema = "public", catalog = "VTInstitute")
 public class PagosEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "idpago", nullable = false)
+
     private Integer idpago;
-    @Basic
-    @Column(name = "cuenta", nullable = false, length = 50)
+
     private String cuenta;
-    @Basic
-    @Column(name = "cantidad", nullable = false, precision = 0)
+
     private BigInteger cantidad;
-    @Basic
-    @Column(name = "operacion", nullable = false, length = 20)
+
     private String operacion;
-    @Basic
-    @Column(name = "idalumno", nullable = false)
+
     private Integer idalumno;
-    @ManyToOne
-    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
+
     private StudentsEntity alumnos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,7 +53,7 @@ public class PagosEntity {
     }
 
     @Basic
-    @Column(name = "operacion", nullable = false, length = 20)
+    @Column(name = "\"Operacion\"", nullable = false, length = 20)
     public String getOperacion() {
         return operacion;
     }

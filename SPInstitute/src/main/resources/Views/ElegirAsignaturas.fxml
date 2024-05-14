@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controllers.ElegirController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.finalproject.agg2324.spinstitute.Controllers.ElegirController">
    <children>
       <GridPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFB96F;">
         <columnConstraints>
@@ -20,7 +20,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </GridPane.margin>
             </ListView>
-            <Button fx:id="btnAceptar" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="ACEPTAR" GridPane.rowIndex="1">
+            <Button fx:id="btnAceptar" mnemonicParsing="false" onAction="#getOptionSelected" prefHeight="40.0" prefWidth="100.0" text="ACEPTAR" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="100.0" />
                </GridPane.margin></Button>

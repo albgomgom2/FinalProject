@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.ListView;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.util.List;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -26,7 +26,9 @@ public class ElegirController {
         this.controller = controller;
     }
 
+
     //funcion que devuelve el item selecciona a la ventana principal
+
     public void getOptionSelected(ActionEvent actionEvent){
         if(!lvlists.getItems().isEmpty()){
             String list = lvlists.getSelectionModel().getSelectedItem();

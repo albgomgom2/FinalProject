@@ -99,6 +99,14 @@ public class Controller {
     private ComboBox<String> cmbAsig2;
     @FXML
     private ComboBox<String> cmbCursos;
+    @FXML
+    private ComboBox<String> cmbRequisitos;
+    @FXML
+    private ComboBox<String> cmbDocumentacion;
+    @FXML
+    private ComboBox<String> cmbMotivos;
+    @FXML
+    private TextField txtOtra;
 
     private List<String> cmbList;
 
@@ -357,10 +365,7 @@ public class Controller {
             alert.showAndWait();
         }else if(Objects.equals(resultado, "Actualizado") || Objects.equals(resultado, "Insertado")){
             abrirventanaPagosMatricula();
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("La matricula se ha realizado correctamente");
-            alert.showAndWait();
+
         }else if(Objects.equals(resultado, "Cursando")){
             alert.setTitle("Information Dialog");
             alert.setHeaderText(null);
@@ -406,10 +411,26 @@ public class Controller {
             alert.showAndWait();
         }else{
             mostrarVentanaConvalidar();
+            refillCombosConvalidar();
         }
     }
 
-    //funcion para abrir la ventana de eleccion de asignaturas dependiendo de si estas en convalidar o renuncia
+    private void refillCombosConvalidar(){
+        cmbDocumentacion.getItems().add("Documento de identificacion (nacional o extranjero).");
+        cmbDocumentacion.getItems().add("Certificacion academica oficial en la que consten lso modulos profesionales cursados, la convocatoria en la que han sido superados y la clasificacion obtenida.");
+        cmbDocumentacion.getItems().add("Fotocopia compulsada del titulo.");
+        cmbDocumentacion.getItems().add("Certificacion oficila de la administracion competente segun el R.D.1224/2009 o certificado de profesionalidad establecido a partir de R.D. 34/2008.");
+
+        cmbRequisitos.getItems().add("Tener superados modulos profesionales de titulos de formacion profesional del catalogo de la LOGSE o bien estar en posesion de un titulo LOGSE, cuya convalidacion esta definida en las normas que regulan los titulos de formacion profesional del catalogo de la LOE.");
+        cmbRequisitos.getItems().add("Tener superados modulos profesionales de titulos de formacion profesional del catalogo de la LOE con diferentes codigos o bien estar en posesion de un titulo LOE, tanto de grado medio como de grado superior.");
+        cmbRequisitos.getItems().add("Tener superados modulos profesionales de diversos titulos formacion profesional basica");
+        cmbRequisitos.getItems().add("Tener acreditadas unidades de competencia que forman parte del catalogo nacional de calificacion profesionales.");
+        cmbRequisitos.getItems().add("Tener superados otros estudios reglados");
+    }
+
+
+
+    //funcion para abrir la ventana de eleccion de asignaturas dependiendo de si estás en convalidar o renuncia
     @FXML
     private void openSceneList(){
         try{
@@ -447,25 +468,10 @@ public class Controller {
         }
     }
 
-
-    //funcion que rellena los combobox de las asignaturas
-    private void refillAsignaturas(){
-        cmbList = new ArrayList<>();
-        newmodel.cmbListAsignaturasC(cmbList, lblnombreCurso.getText());
-        for(String str : cmbList){
-            cmbAsignaturas.getItems().add(str);
-        }
-        cmbList = new ArrayList<>();
-        newmodel.cmbListAsignaturasR(cmbList, lblnombreCurso.getText(), lblDni.getText());
-        for (String str : cmbList){
-            cmbAsig2.getItems().add(str);
-        }
-    }
-
     //funcion que realiza la actualizacion de las notas(convalidacion) y abre la ventana de descargas
     @FXML
     private void realizarConvalidacion(){
-        newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
+        //newmodel.updateNotasConvalidacion(lblDni.getText(), lvasignaturas.getItems());
         openSceneDescargasConvalidar();
     }
 
@@ -543,10 +549,32 @@ public class Controller {
             alert.showAndWait();
         }else{
             mostrarVentanaRenuncia();
+            refillComboRenuncia();
         }
     }
 
-    //funcion que comprueba para poder abrir la ventana de titulo
+    private void refillComboRenuncia(){
+        cmbMotivos.getItems().add("Enfermedad Prolongada o accidente.");
+        cmbMotivos.getItems().add("Obligaciones de tipo personal o familiar.");
+        cmbMotivos.getItems().add("Desempeño de un puesto de trabajo.");
+        cmbMotivos.getItems().add("Maternidad, paternidad, adopcion o acogimiento.");
+        cmbMotivos.getItems().add("Otras Circustancias (especificar):");
+    }
+
+
+
+    @FXML
+    private void mostrarTxtMotivos(){
+        if(Objects.equals(cmbMotivos.getSelectionModel().getSelectedItem(), "Otras Circustancias (especificar):")){
+            txtOtra.setVisible(true);
+        }else{
+            txtOtra.setVisible(false);
+        }
+    }
+
+
+
+    //funcion que comprueba para poder abrir la ventana de título
     @FXML
     private void abrirVentanaTitulo(){
         if(newmodel.checkCursosAprobados(lblDni.getText())){

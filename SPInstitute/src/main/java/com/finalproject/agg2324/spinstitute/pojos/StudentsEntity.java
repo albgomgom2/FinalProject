@@ -10,57 +10,41 @@ import java.util.Set;
 @Entity
 @Table(name = "\"Students\"", schema = "public", catalog = "VTInstitute")
 public class StudentsEntity {
-    @Basic
-    @Column(name = "nombre", nullable = false, length = 30)
+
     private String nombre;
-    @Basic
-    @Column(name = "apellidos", nullable = false, length = 50)
+
     private String apellidos;
-    @Basic
-    @Column(name = "edad", nullable = false, precision = 0)
+
     private BigInteger edad;
-    @Basic
-    @Column(name = "direccion", nullable = false, length = 100)
+
     private String direccion;
-    @Basic
-    @Column(name = "localidad", nullable = false, length = 30)
+
     private String localidad;
-    @Basic
-    @Column(name = "ciudad", nullable = false, length = 30)
+
     private String ciudad;
-    @Basic
-    @Column(name = "pais", nullable = false, length = 30)
+
     private String pais;
-    @Basic
-    @Column(name = "activo", nullable = false)
+
     private Boolean activo;
-    @Basic
-    @Column(name = "telefono", nullable = false, length = 9)
+
     private String telefono;
-    @Basic
-    @Column(name = "email", nullable = false, length = 100)
+
     private String email;
-    @Basic
-    @Column(name = "date_", nullable = false)
+
     private Date date;
-    @Basic
-    @Column(name = "usuario", nullable = false, length = 9)
+
     private String usuario;
-    @Basic
-    @Column(name = "contrasenya", nullable = false, length = 100)
+
     private String contrasenya;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "idalumno", nullable = false)
+
     private Integer idalumno;
-    @Basic
-    @Column(name = "dni", nullable = false, length = 9)
+
     private String dni;
-    @OneToMany(mappedBy = "alumnos")
+
     private Set<MatriculaEntity> matriculas;
-    @OneToMany(mappedBy = "alumnos")
+
     private Set<PagosEntity> pagos;
-    @OneToMany(mappedBy = "alumnos")
+
     private Set<NotasEntity> notas;
 
     @Basic

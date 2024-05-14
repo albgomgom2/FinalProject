@@ -1,13 +1,10 @@
 package com.finalproject.agg2324.spinstitute.Controllers;
 
-import com.finalproject.agg2324.spinstitute.Documentos;
 import javafx.fxml.FXML;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
 import javafx.scene.image.ImageView;
 
 import javafx.scene.Node;
@@ -22,7 +19,6 @@ public class DescargarController {
     private ImageView btnguardar;
 
     private Controller controller;
-    Documentos doc = new Documentos();
 
     //funcion que escribe los datos en un documento
     public void guardarDocumento(String cadena, File archivo){
@@ -55,31 +51,43 @@ public class DescargarController {
 
     //funcion para cargar el texto del título
     public void cargarTextoTitulo(){
-        txtadoc.setText(doc.documentoTitulo());
+        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
     }
 
     //funcion para cargar el texto de la renuncia
     public void cargarTextoRenuncia(){
-        txtadoc.setText(doc.documentoRenuncia());
+        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
     }
 
     //funcion para cargar el texto de la convalidación
     public void cargarTextoConvalidar(){
-        txtadoc.setText(doc.documentoConvalidar());
+        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
     }
 
     //funcion para cargar el texto de la baja
     public void cargarTextoBaja(){
-        txtadoc.setText(doc.documentoBaja());
+        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
     }
 
-    //funcion para cargar el texto de la matrícula
-    public void cargarTextoMatricula(){
-        txtadoc.setText(doc.documentoMatricula());
+
+    public String leerArchivo(String url){
+        try{
+            File leer = new File(url);
+            int tamanyo = (int)leer.length();
+            int caracteres = 0;
+            FileReader in = new FileReader(leer);
+            char[] data = new char[tamanyo];
+            while(in.ready()){
+                caracteres += in.read(data, caracteres, tamanyo - caracteres);
+            }
+            in.close();
+            return new String(data, 0, caracteres);
+        }catch(Exception e){
+            System.out.println("Error al leer el archivo");
+            e.printStackTrace();
+            return e.toString();
+        }
     }
 
-    //funcion que cargue un documento en el textarea
-    public void cargarTextoDocumento(File archivo){
 
-    }
 }

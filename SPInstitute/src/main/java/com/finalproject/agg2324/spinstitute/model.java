@@ -265,9 +265,7 @@ public class model {
             List<CursosEntity> cursosEntities = mycurso.list();
             CursosEntity curso = cursosEntities.get(0);
             List<String> listasig = new ArrayList<>();
-            Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where cursos = " + curso.getIdCurso());
-            List<AsignaturasEntity> asig = myQuery.list();
-            for(AsignaturasEntity asignaturas : asig){
+            for(AsignaturasEntity asignaturas : curso.getAsignaturas()){
                 listasig.add(asignaturas.getNombre());
             }
             return listasig;
@@ -282,7 +280,7 @@ public class model {
         try(Session session = sessionfactory.openSession()){
             Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where nombre = '"+nombre+"'");
             List<AsignaturasEntity> asignaturasEntities = asigQuery.list();
-            if(asignaturasEntities.size() > 1){
+            if(asignaturasEntities.size() == 1){
                 for(AsignaturasEntity entity : asignaturasEntities){
                     Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where idalumno = "+obtenerIdAlumno(dni)+" and asignatura = " + entity.getIdAsignaturas());
                     List<NotasEntity> notasEntities = notasQuery.list();

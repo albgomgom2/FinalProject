@@ -9,26 +9,18 @@ import java.util.Set;
 @Entity
 @Table(name = "\"Cursos\"", schema = "public", catalog = "VTInstitute")
 public class CursosEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id_curso", nullable = false)
     private Integer idCurso;
-    @Basic
-    @Column(name = "nombre", nullable = false, length = 100)
+
     private String nombre;
-    @Basic
-    @Column(name = "abreviatura", nullable = false, length = 10)
+
     private String abreviatura;
-    @Basic
-    @Column(name = "aula", nullable = false, length = 10)
+
     private String aula;
-    @Basic
-    @Column(name = "turno", nullable = false, precision = 0)
+
     private BigInteger turno;
-    @OneToMany(mappedBy = "cursos")
+
     private Set<MatriculaEntity> matriculas;
-    @ManyToMany
-    @JoinTable(name = "Asignaturas_Cursos", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false), inverseJoinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false))
+
     private Set<AsignaturasEntity> asignaturas;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)

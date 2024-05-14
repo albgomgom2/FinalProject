@@ -255,7 +255,7 @@
                   <Insets right="15.0" top="150.0" />
                </GridPane.margin>
             </ListView>
-            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgBuscar" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#openSceneList" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="80.0" right="70.0" />
                </GridPane.margin>
@@ -271,7 +271,7 @@
                   <Image url="@../../../../images/aprobar.png" />
                </image>
             </ImageView>
-            <Label text="Label" visible="false" />
+            <Label fx:id="lblidAsignatura" text="Label" visible="false" />
             <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#subirFicheros" pickOnBounds="true" preserveRatio="true">
                <GridPane.margin>
                   <Insets bottom="25.0" left="50.0" />
@@ -294,22 +294,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="cmbAsig2" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets right="15.0" top="30.0" />
-               </GridPane.margin>
-            </ComboBox>
-            <Label text="Asignaturas: " GridPane.halignment="LEFT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="15.0" top="35.0" />
-               </GridPane.margin>
-            </Label>
             <ListView fx:id="lvAsignaturasR" maxHeight="110.0" maxWidth="188.0" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" right="15.0" />
                </GridPane.margin>
             </ListView>
-            <ComboBox fx:id="cmbMotivos" layoutX="123.0" layoutY="41.0" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <ComboBox fx:id="cmbMotivos" layoutX="123.0" layoutY="41.0" onAction="#mostrarTxtMotivos" prefWidth="279.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="15.0" top="70.0" />
                </GridPane.margin>

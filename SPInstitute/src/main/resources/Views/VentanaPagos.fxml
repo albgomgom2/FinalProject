@@ -51,8 +51,8 @@
                   <Insets right="15.0" />
                </GridPane.margin>
             </TextField>
-            <ComboBox fx:id="cmbcantidadpago" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ImageView fitHeight="64.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <ComboBox fx:id="cmbcantidadpago" onAction="#habilitarBoton" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ImageView fx:id="imgpago" disable="true" fitHeight="64.0" fitWidth="70.0" onMouseClicked="#insertarPago" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/aprobar.png" />
                </image>

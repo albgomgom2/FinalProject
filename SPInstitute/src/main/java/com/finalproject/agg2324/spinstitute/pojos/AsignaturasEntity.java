@@ -9,19 +9,15 @@ import java.util.Set;
 @Entity
 @Table(name = "\"Asignaturas\"", schema = "public", catalog = "VTInstitute")
 public class AsignaturasEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id_asignaturas", nullable = false)
+
     private Integer idAsignaturas;
-    @Basic
-    @Column(name = "nombre", nullable = false, length = 100)
+
     private String nombre;
-    @Basic
-    @Column(name = "horas", nullable = false, precision = 0)
+
     private BigInteger horas;
-    @OneToMany(mappedBy = "asignaturas")
+
     private Set<NotasEntity> notas;
-    @ManyToMany(mappedBy = "asignaturas")
+
     private Set<CursosEntity> cursos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,7 +74,7 @@ public class AsignaturasEntity {
     }
 
     @ManyToMany
-    @JoinTable(name = "Asignaturas_Cursos", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false), inverseJoinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false))
+    @JoinTable(name = "\"Asignaturas_Cursos\"", catalog = "VTInstitute", schema = "public", joinColumns = @JoinColumn(name = "asignatura", referencedColumnName = "id_asignaturas", nullable = false), inverseJoinColumns = @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false))
     public Set<CursosEntity> getCursos() {
         return cursos;
     }

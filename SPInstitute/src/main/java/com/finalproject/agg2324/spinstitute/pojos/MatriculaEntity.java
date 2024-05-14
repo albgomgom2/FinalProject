@@ -8,36 +8,25 @@ import java.util.Objects;
 @Entity
 @Table(name = "\"Matriculas\"", schema = "public", catalog = "VTInstitute")
 public class MatriculaEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id_matricula", nullable = false)
+
     private Integer idMatricula;
-    @Basic
-    @Column(name = "repetidor", nullable = false)
+
     private Boolean repetidor;
-    @Basic
-    @Column(name = "estado", nullable = false, length = 30)
+
     private String estado;
-    @Basic
-    @Column(name = "fechamatricula", nullable = false)
+
     private Date fechamatricula;
-    @Basic
-    @Column(name = "idcurso", nullable = false)
+
     private Integer idcurso;
-    @Basic
-    @Column(name = "nivel", nullable = false)
+
     private Integer nivel;
-    @Basic
-    @Column(name = "turno", nullable = false, length = 10)
+
     private String turno;
-    @Basic
-    @Column(name = "idalumno", nullable = false)
+
     private Integer idalumno;
-    @ManyToOne
-    @JoinColumn(name = "idalumno", referencedColumnName = "idalumno", nullable = false)
+
     private StudentsEntity alumnos;
-    @ManyToOne
-    @JoinColumn(name = "idcurso", referencedColumnName = "id_curso", nullable = false)
+
     private CursosEntity cursos;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
