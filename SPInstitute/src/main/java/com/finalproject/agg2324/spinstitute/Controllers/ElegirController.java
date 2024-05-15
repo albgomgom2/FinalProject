@@ -28,7 +28,6 @@ public class ElegirController {
 
 
     //funcion que devuelve el item selecciona a la ventana principal
-
     public void getOptionSelected(ActionEvent actionEvent){
         if(!lvlists.getItems().isEmpty()){
             String list = lvlists.getSelectionModel().getSelectedItem();

@@ -56,6 +56,7 @@ public class PagosController {
         }
     }
 
+    //funcion que habilita el boton si se ha selecionado alguna opcion en el combobox.
     @FXML
     private void habilitarBoton(){
         if(cmbcantidadpago.getSelectionModel().getSelectedItem() != null){

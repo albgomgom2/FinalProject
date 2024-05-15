@@ -1,10 +1,13 @@
 package com.finalproject.agg2324.spinstitute.Controllers;
 
+import com.finalproject.agg2324.spinstitute.Documentos;
 import javafx.fxml.FXML;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.List;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
 import javafx.scene.Node;
@@ -14,9 +17,13 @@ import javafx.stage.Stage;
 public class DescargarController {
 
     @FXML
+    public TextArea txttemporal;
+    @FXML
     private TextArea txtadoc;
     @FXML
     private ImageView btnguardar;
+
+    Documentos docs = new Documentos();
 
     private Controller controller;
 
@@ -32,6 +39,12 @@ public class DescargarController {
         }catch(IOException ex){
             JOptionPane.showMessageDialog(null, "Error al guardar, en la salida");
         }
+    }
+
+    //funcion que recoge los datos de la pantalla principal
+    public void recogerDatos(String datos, List<String> asig){
+        String[] withoutspace = datos.split("  ");
+        txtadoc.setText(docs.docConvalidacion(withoutspace[0], withoutspace[1], withoutspace[2], asig));
     }
 
     //funcion que guarda el documento en una ruta elegida
@@ -51,43 +64,25 @@ public class DescargarController {
 
     //funcion para cargar el texto del título
     public void cargarTextoTitulo(){
-        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
+
     }
 
     //funcion para cargar el texto de la renuncia
     public void cargarTextoRenuncia(){
-        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
+
     }
 
     //funcion para cargar el texto de la convalidación
     public void cargarTextoConvalidar(){
-        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
+
     }
 
     //funcion para cargar el texto de la baja
     public void cargarTextoBaja(){
-        txtadoc.setText(leerArchivo("d:\\agomis\\Desktop\\Nueva carpeta\\FinalProject\\FinalProject\\SPInstitute\\src\\main\\resources\\Documentos\\DocumentoConvalidar.txt"));
+
     }
 
 
-    public String leerArchivo(String url){
-        try{
-            File leer = new File(url);
-            int tamanyo = (int)leer.length();
-            int caracteres = 0;
-            FileReader in = new FileReader(leer);
-            char[] data = new char[tamanyo];
-            while(in.ready()){
-                caracteres += in.read(data, caracteres, tamanyo - caracteres);
-            }
-            in.close();
-            return new String(data, 0, caracteres);
-        }catch(Exception e){
-            System.out.println("Error al leer el archivo");
-            e.printStackTrace();
-            return e.toString();
-        }
-    }
 
 
 }

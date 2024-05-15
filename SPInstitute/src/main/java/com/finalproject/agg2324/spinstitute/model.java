@@ -84,7 +84,7 @@ public class model {
         return false;
     }
 
-    //funcion que depende del estado de una matricula me hace diferentes operaciones.
+    //funcion que depende del estado de una matrícula me hace diferentes operaciones.
     public String checkMatriculaCurso(String dni, String nombre, String turno, int nivel){
         try(Session session = sessionfactory.openSession()){
             Query<MatriculaEntity> matriculaQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where idalumno = "+obtenerIdAlumno(dni)+" and idcurso = "+idCurso(nombre)+" and nivel = " + nivel);
@@ -148,7 +148,7 @@ public class model {
     //funcion que modifica una matricula
     public void modificarMatricula(String dni, String nombre, String turno){
         try(Session session = sessionfactory.openSession()){
-            Query<MatriculaEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where idalumno = '"+obtenerIdAlumno(dni)+"' and idcurso = " + idCurso(nombre));
+            Query<MatriculaEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where idalumno = " + obtenerIdAlumno(dni) + " and idcurso = " + idCurso(nombre) + " and estado = 'Suspendido' or estado = 'Renunciado'");
             List<MatriculaEntity> matriculaEntities = myQuery.list();
             Transaction transaction = session.beginTransaction();
             MatriculaEntity matricula = matriculaEntities.get(0);
@@ -245,19 +245,6 @@ public class model {
     }
 
     //Parte Ventana Convalidacion---------------------------------------------------------------------------------------------------------------------------------
-    //funcion que rellena una lista para posteriormente rellenar un combobox
-    public void cmbListAsignaturasC(List<String> asig, String nombre){
-        try(Session session = sessionfactory.openSession()){
-            Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where cursos = " + idCurso(nombre));
-            List<AsignaturasEntity> asignaturasEntity = asigQuery.list();
-            for (AsignaturasEntity asignaturas : asignaturasEntity){
-                asig.add(asignaturas.getNombre());
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
     //funcion que busca las asignaturas de un curso
     public List<String> selectAsignaturas(String dni){
         try(Session session = sessionfactory.openSession()){
@@ -282,14 +269,18 @@ public class model {
             List<AsignaturasEntity> asignaturasEntities = asigQuery.list();
             if(asignaturasEntities.size() == 1){
                 for(AsignaturasEntity entity : asignaturasEntities){
-                    Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where idalumno = "+obtenerIdAlumno(dni)+" and asignatura = " + entity.getIdAsignaturas());
+                    Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where idalumno = "+obtenerIdAlumno(dni)+" and asignatura = " + entity.getIdAsignaturas() +" and estado != 'Aprobado'");
                     List<NotasEntity> notasEntities = notasQuery.list();
                     if(!notasEntities.isEmpty()){
-                        for(NotasEntity notasEntity:notasEntities){
-                            if(Objects.equals(notasEntity.getEstado(), "Aprobado")){
+                        Query<NotasEntity> notasEntityQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where idalumno = "+obtenerIdAlumno(dni)+" and asignatura = " + entity.getIdAsignaturas() +" and estado = 'Aprobado'");
+                        List<NotasEntity> notasEntities2 = notasEntityQuery.list();
+                        for(NotasEntity notas:notasEntities2){
+                            if(Objects.equals(notas.getEstado(), "Aprobado")){
                                 return true;
                             }
                         }
+                    }else{
+                        return false;
                     }
                 }
             }else{
@@ -302,58 +293,35 @@ public class model {
     }
 
     //funcion que devuelve el id de la asignatura de una lista de nombre de asignaturas
-    private List<Integer> idAsignatura(List<String> nombre){
+    private Integer idAsignatura(String nombre){
         try(Session session = sessionfactory.openSession()){
-            List<Integer> ids = new ArrayList<>();
-            for(String asignaturas : nombre){
-                Query<AsignaturasEntity> asigquery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where nombre like '"+asignaturas+"'");
-                List<AsignaturasEntity> asignatura = asigquery.list();
-                for(AsignaturasEntity asig:asignatura){
-                    ids.add(asig.getIdAsignaturas());
-                }
-            }
-            return ids;
+                Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where nombre = '"+nombre+"'");
+                AsignaturasEntity asignaturasEntity = asigQuery.uniqueResult();
+                return asignaturasEntity.getIdAsignaturas();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return null;
+        return -1;
     }
 
     //funcion que relaiza las convalidaciones
-    public void updateNotasConvalidacion(String dni, List<String> nombres){
+    public void updateNotasConvalidacion(String dni, String nombres){
         try(Session session = sessionfactory.openSession()){
-            Query<MatriculaEntity> matQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.MatriculaEntity where idalumno = "+obtenerIdAlumno(dni)+" and estado = 'Cursando'");
-            MatriculaEntity matriculaEntity = matQuery.uniqueResult();
-            for(int i : Objects.requireNonNull(idAsignatura(nombres))){
-                Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where cursos = " + matriculaEntity.getIdcurso() +" and idAsignaturas = " + i);
-                AsignaturasEntity asignaturasEntity = asigQuery.uniqueResult();
-                Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where asignatura = " + asignaturasEntity.getIdAsignaturas());
-                List<NotasEntity> notasEntities = notasQuery.list();
-                Transaction transaction = session.beginTransaction();
-                NotasEntity notas = notasEntities.get(0);
-                notas.setEstado("Convalidado");
-                session.update(notas);
-                transaction.commit();
-            }
+            Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where idAsignaturas = " + idAsignatura(nombres));
+            AsignaturasEntity asignaturasEntity = asigQuery.uniqueResult();
+            Query<NotasEntity> notasQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.NotasEntity where asignatura = " + asignaturasEntity.getIdAsignaturas() + " and estado = 'Cursando'");
+            List<NotasEntity> notasEntities = notasQuery.list();
+            Transaction transaction = session.beginTransaction();
+            NotasEntity notas = notasEntities.get(0);
+            notas.setEstado("Convalidado");
+            session.update(notas);
+            transaction.commit();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
     }
 
     //Parte Ventana Renuncia--------------------------------------------------------------------------------------------------------------------------------------
-    //funcion que rellena una lista para posteriormente rellenar un combobox
-    public void cmbListAsignaturasR(List<String> asig, String nombre, String dni){
-        try(Session session = sessionfactory.openSession()){
-            Query<AsignaturasEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity a join fetch a.notas n where n.idalumno = "+obtenerIdAlumno(dni)+" and n.estado = 'Aprobado' and n.estado = 'Convalidado' and a.cursos = " + idCurso(nombre));
-            List<AsignaturasEntity> notas = myQuery.list();
-            for(AsignaturasEntity asignaturas : notas){
-                asig.add(asignaturas.getNombre());
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
     //funcion que busca asignaturas filtradas por estados que no sean convalidados o aprobados
     public List<String> selectAsignaturasFiltradasPorEstado(String dni){
         try(Session session = sessionfactory.openSession()){
