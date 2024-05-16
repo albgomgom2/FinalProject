@@ -19,18 +19,27 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Usuario: " GridPane.halignment="CENTER" />
-            <Label text="Contraseña: " GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label text="Usuario: " GridPane.halignment="CENTER">
+               <GridPane.margin>
+                  <Insets top="100.0" />
+               </GridPane.margin></Label>
+            <Label text="Contraseña: " GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets top="50.0" />
+               </GridPane.margin></Label>
             <TextField fx:id="txtUser" GridPane.columnIndex="1">
                <GridPane.margin>
-                  <Insets right="10.0" />
+                  <Insets right="10.0" top="100.0" />
                </GridPane.margin></TextField>
-            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../../images/iniciar-sesion.png" />
                </image>
+               <GridPane.margin>
+                  <Insets left="150.0" />
+               </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#Salir" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#Salir" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin>
@@ -40,9 +49,24 @@
             </ImageView>
             <PasswordField fx:id="txtpassword" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets right="15.0" />
+                  <Insets right="15.0" top="50.0" />
                </GridPane.margin>
             </PasswordField>
+            <Label text="VTINSTITUTE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="48.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="25.0" />
+               </GridPane.margin></Label>
+            <ImageView fitHeight="150.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <image>
+                  <Image url="@../../../../images/logo.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
       <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
