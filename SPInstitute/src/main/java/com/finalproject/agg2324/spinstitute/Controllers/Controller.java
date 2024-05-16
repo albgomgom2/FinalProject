@@ -308,6 +308,8 @@ public class Controller {
         }
     }
 
+
+
     //Parte Ventana Matricula-------------------------------------------------------------------------------------------------------------------------------------
     //funcion para rellenar un combobox de cursos
     private void refillCursos(){

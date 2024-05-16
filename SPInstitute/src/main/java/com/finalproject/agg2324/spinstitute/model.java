@@ -30,6 +30,20 @@ public class model {
       return false;
     }
 
+    public void cambiarContraseña(String password, String email){
+        try(Session session = sessionfactory.openSession()){
+            Query<StudentsEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.StudentsEntity where email = '"+email+"'");
+            List<StudentsEntity> alumnosEntities = myQuery.list();
+            Transaction transaction = session.beginTransaction();
+            StudentsEntity alumnos = alumnosEntities.get(0);
+            alumnos.setContrasenya(password);
+            session.update(alumnos);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     //funcion que recoge los datos del usuario y los devuelve a la pantalla principal
     public String dataStudents(String user, String password){
         try(Session session = sessionfactory.openSession()){
