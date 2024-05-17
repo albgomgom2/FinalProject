@@ -19,11 +19,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Usuario: " GridPane.halignment="CENTER">
+            <Label fx:id="lblinicioUser" text="Usuario: " GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets top="100.0" />
                </GridPane.margin></Label>
-            <Label text="Contraseña: " GridPane.halignment="CENTER" GridPane.rowIndex="1">
+            <Label fx:id="lbliniciopass" text="Contraseña: " GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets top="50.0" />
                </GridPane.margin></Label>
@@ -31,7 +31,7 @@
                <GridPane.margin>
                   <Insets right="10.0" top="100.0" />
                </GridPane.margin></TextField>
-            <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fx:id="imginiciars" fitHeight="65.0" fitWidth="65.0" onMouseClicked="#iniciarSesion" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../../../../images/iniciar-sesion.png" />
                </image>
@@ -39,7 +39,7 @@
                   <Insets left="150.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fitHeight="65.0" fitWidth="65.0" onMouseClicked="#Salir" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <ImageView fx:id="imgsalirsesion" fitHeight="65.0" fitWidth="65.0" onMouseClicked="#Salir" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="15.0" />
                </GridPane.margin>
@@ -67,6 +67,37 @@
                   <Image url="@../../../../images/logo.png" />
                </image>
             </ImageView>
+            <Hyperlink fx:id="hplcambiarpass" onMouseClicked="#mostrarCamposCambiarContraseña" text="¿Has olvidado tu contraseña?" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Hyperlink>
+            <Label fx:id="lblrepetirpass" text="Repetir Contraseña: " visible="false" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="30.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="lblnuevapass" text="Contraseña Nueva: " visible="false" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets top="30.0" />
+               </GridPane.margin>
+            </Label>
+            <ImageView fx:id="imgaceptarpass" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#cambiarContraseña" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../images/aceptar.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="60.0" />
+               </GridPane.margin>
+            </ImageView>
+            <PasswordField fx:id="txtnuevapass" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" top="25.0" />
+               </GridPane.margin></PasswordField>
+            <PasswordField fx:id="txtrepetirpass" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="25.0" left="10.0" right="10.0" />
+               </GridPane.margin></PasswordField>
          </children>
       </GridPane>
       <GridPane fx:id="grpDatosUsuario" prefHeight="322.0" prefWidth="194.0" style="-fx-background-color: FFA547; -fx-border-color: black;" visible="false">
