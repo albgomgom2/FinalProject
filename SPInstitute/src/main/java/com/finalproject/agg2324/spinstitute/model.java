@@ -30,6 +30,38 @@ public class model {
       return false;
     }
 
+    //funcion para cambiar la contraseña
+    public void cambiarContraseña(String password, String usuario){
+        try(Session session = sessionfactory.openSession()){
+            Query<StudentsEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.StudentsEntity where usuario = '"+usuario+"'");
+            List<StudentsEntity> alumnosEntities = myQuery.list();
+            Transaction transaction = session.beginTransaction();
+            StudentsEntity alumnos = alumnosEntities.get(0);
+            alumnos.setContrasenya(password);
+            session.update(alumnos);
+            transaction.commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    //funcion que comprueba si la contraseña que introduces es igual a la que ya tenias
+    public boolean contrasenyaIgual(String usuario, String contrasenya){
+        try(Session session = sessionfactory.openSession()){
+            Query<StudentsEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.StudentsEntity where usuario = '"+usuario+"'");
+            StudentsEntity alumnos = myQuery.uniqueResult();
+            if(alumnos.getContrasenya().equals(contrasenya)){
+                return false;
+            }else{
+                return true;
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     //funcion que recoge los datos del usuario y los devuelve a la pantalla principal
     public String dataStudents(String user, String password){
         try(Session session = sessionfactory.openSession()){
@@ -305,7 +337,7 @@ public class model {
         return false;
     }
 
-    //funcion que devuelve el id de la asignatura de una lista de nombre de asignaturas
+    //funcion que devuelve el id de la asignatura de una lista de nombres de asignaturas
     private Integer idAsignatura(String nombre){
         try(Session session = sessionfactory.openSession()){
                 Query<AsignaturasEntity> asigQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.AsignaturasEntity where nombre = '"+nombre+"'");

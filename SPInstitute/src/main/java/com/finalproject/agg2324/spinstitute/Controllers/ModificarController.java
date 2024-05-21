@@ -69,7 +69,7 @@ public class ModificarController {
                 if(validarCiudad()){
                     if(validarTelefono()){
                         if(validarEmail()){
-                            if(validarContraseña()){
+                            if(validarContraseñaModificar()){
                                 controller.ObtenerDatosAModificar(modificarDatosController());
                                 Node n = (Node) actionevent.getSource();
                                 Stage stage = (Stage) n.getScene().getWindow();
@@ -152,39 +152,8 @@ public class ModificarController {
     }
 
     //funcion para validar una contraseña
-    private boolean validarContraseña(){
-        if(txtMContraseña.getText().length() > 8){
-            boolean mayuscula = false;
-            boolean numero = false;
-            boolean letraoSimbolo = false;
-            boolean especial = false;
-
-            Pattern special = Pattern.compile("[?!¡@¿.,'_)]");
-            Matcher hasSpecial = special.matcher(txtMContraseña.getText());
-
-            int i;
-            char l;
-
-            for (i = 0; i < txtMContraseña.getText().length(); i++){
-                l = txtMContraseña.getText().charAt(i);
-
-                if(Character.isDigit(l)){
-                    numero = true;
-                }
-                if(Character.isLetter(l)){
-                    letraoSimbolo = true;
-                }
-                if(Character.isUpperCase(l)){
-                    mayuscula = true;
-                }
-                if(hasSpecial.find()){
-                    especial = true;
-                }
-            }
-            return numero && letraoSimbolo && especial && mayuscula;
-        }else{
-            return false;
-        }
+    private boolean validarContraseñaModificar(){
+        return controller.validarContraseña(txtMContraseña);
     }
 
     //funcion que me recoge los datos en un string

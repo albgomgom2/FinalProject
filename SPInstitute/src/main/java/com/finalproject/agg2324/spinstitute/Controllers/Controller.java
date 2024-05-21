@@ -16,6 +16,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Controller {
@@ -53,6 +55,26 @@ public class Controller {
     private ComboBox<String> cmbnivel;
     @FXML
     private ImageView imgUser;
+    @FXML
+    private ImageView imgaceptarpass;
+    @FXML
+    private Label lblnuevapass;
+    @FXML
+    private Label lblrepetirpass;
+    @FXML
+    private PasswordField txtnuevapass;
+    @FXML
+    private PasswordField txtrepetirpass;
+    @FXML
+    private Label lblinicioUser;
+    @FXML
+    private Label lbliniciopass;
+    @FXML
+    private ImageView imginiciars;
+    @FXML
+    private ImageView imgsalirsesion;
+    @FXML
+    private Hyperlink hplcambiarpass;
     @FXML
     private GridPane grpMenu;
     @FXML
@@ -307,6 +329,126 @@ public class Controller {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void mostrarCamposCambiarContraseña(){
+        if(lblnuevapass.isVisible()){
+            lblnuevapass.setVisible(false);
+            lblrepetirpass.setVisible(false);
+            txtnuevapass.setVisible(false);
+            txtrepetirpass.setVisible(false);
+            imgaceptarpass.setVisible(false);
+            lblinicioUser.setVisible(true);
+            lbliniciopass.setVisible(true);
+            txtUser.setVisible(true);
+            txtpassword.setVisible(true);
+            imginiciars.setVisible(true);
+            imgsalirsesion.setVisible(true);
+            hplcambiarpass.setVisible(true);
+        }else if (lblinicioUser.isVisible()){
+            if(!txtUser.getText().isEmpty()){
+                lblinicioUser.setVisible(false);
+                hplcambiarpass.setVisible(false);
+                lbliniciopass.setVisible(false);
+                txtUser.setVisible(false);
+                txtpassword.setVisible(false);
+                imginiciars.setVisible(false);
+                imgsalirsesion.setVisible(false);
+                lblnuevapass.setVisible(true);
+                lblrepetirpass.setVisible(true);
+                txtnuevapass.setVisible(true);
+                txtrepetirpass.setVisible(true);
+                imgaceptarpass.setVisible(true);
+            }else{
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Indica el usuario");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    private void cambiarContraseña(){
+        if(!txtnuevapass.getText().isEmpty() && !txtrepetirpass.getText().isEmpty()){
+            if(Objects.equals(txtnuevapass.getText(), txtrepetirpass.getText())){
+                if(validarContraseña(txtnuevapass)){
+                    if(newmodel.contrasenyaIgual(txtUser.getText(), txtnuevapass.getText())){
+                        newmodel.cambiarContraseña(txtnuevapass.getText(), txtUser.getText());
+                        alert.setTitle("Information Dialog");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Contraseña cambiada con éxito");
+                        alert.showAndWait();
+                        mostrarCamposCambiarContraseña();
+                    }else{
+                        alert.setTitle("Information Dialog");
+                        alert.setHeaderText(null);
+                        alert.setContentText("La contraseña no puede ser igual a la anterior");
+                        alert.showAndWait();
+                    }
+                }else{
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("""
+                            Contraseña no valida, la contraseña debe contener:\s
+                            -Mínimo 8 caracteres.
+                            -Mínimo 1 mayúscula.
+                            -Mínimo 1 numero.
+                            -Mínimo 1 símbolo especial: ?!¡@¿.,´)_""");
+                    alert.showAndWait();
+                }
+            }else{
+                alert.setTitle("Information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Ambas Contraseñas deben de ser iguales");
+                alert.showAndWait();
+            }
+
+        }else{
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Tienes que rellenar ambos campos");
+            alert.showAndWait();
+        }
+    }
+
+
+
+    public boolean validarContraseña(PasswordField password) {
+        if(password.getText().length() > 8){
+            boolean mayuscula = false;
+            boolean numero = false;
+            boolean letraoSimbolo = false;
+            boolean especial = false;
+
+            Pattern special = Pattern.compile("[?!¡@¿.,'_*)]");
+            Matcher hasSpecial = special.matcher(password.getText());
+
+            int i;
+            char l;
+
+            for (i = 0; i < password.getText().length(); i++){
+                l = password.getText().charAt(i);
+
+                if(Character.isDigit(l)){
+                    numero = true;
+                }
+                if(Character.isLetter(l)){
+                    letraoSimbolo = true;
+                }
+                if(Character.isUpperCase(l)){
+                    mayuscula = true;
+                }
+                if(hasSpecial.find()){
+                    especial = true;
+                }
+            }
+            return numero && letraoSimbolo && especial && mayuscula;
+        }else{
+            return false;
+        }
+    }
+
 
     //Parte Ventana Matricula-------------------------------------------------------------------------------------------------------------------------------------
     //funcion para rellenar un combobox de cursos
