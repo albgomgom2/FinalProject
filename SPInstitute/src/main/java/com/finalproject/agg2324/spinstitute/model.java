@@ -244,6 +244,8 @@ public class model {
         }
     }
 
+
+
     //Parte Ventana Convalidacion---------------------------------------------------------------------------------------------------------------------------------
     //funcion que busca las asignaturas de un curso
     public List<String> selectAsignaturas(String dni){
@@ -262,6 +264,17 @@ public class model {
         return null;
     }
 
+    //funcion que devuelve el nombre del curso en el que esta cursado
+    public String nombreCursomatricula(String dni){
+        try(Session session = sessionfactory.openSession()){
+            Query<CursosEntity> myQuery = session.createQuery("from com.finalproject.agg2324.spinstitute.pojos.CursosEntity c join fetch c.matriculas m where m.idalumno = " + obtenerIdAlumno(dni) + " and m.estado = 'Cursando'");
+            CursosEntity curso = myQuery.uniqueResult();
+            return curso.getNombre();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
     //funcion que devuelve si se puede convalidar una asignatura
     public boolean convalidarAsignatura(String dni, String nombre){
         try(Session session = sessionfactory.openSession()){

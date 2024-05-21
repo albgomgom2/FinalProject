@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "\"Matriculas\"", schema = "public", catalog = "VTInstitute")
+@Table(name = "\"Matricula\"", schema = "public", catalog = "VTInstitute")
 public class MatriculaEntity {
 
     private Integer idMatricula;

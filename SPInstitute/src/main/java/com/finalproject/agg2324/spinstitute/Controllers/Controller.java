@@ -485,7 +485,8 @@ public class Controller {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/DescargarDocumento.fxml"));
             Parent root = fxmlLoader.load();
             DescargarController controller = fxmlLoader.getController();
-            controller.recogerDatos(lblDni.getText() + "  " + lblNombre.getText() + "  " + lblApellidos.getText(), lvasignaturas.getItems());
+            lblnombreCurso.setText(newmodel.nombreCursomatricula(lblDni.getText()));
+            controller.recogerDatos(lblDni.getText() + "  " + lblNombre.getText() + "  " + lblApellidos.getText() + "  " + lblnombreCurso.getText(), lvasignaturas.getItems());
             controller.cargarTextoConvalidar();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

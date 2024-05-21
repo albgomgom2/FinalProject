@@ -44,7 +44,7 @@ public class DescargarController {
     //funcion que recoge los datos de la pantalla principal
     public void recogerDatos(String datos, List<String> asig){
         String[] withoutspace = datos.split("  ");
-        txtadoc.setText(docs.docConvalidacion(withoutspace[0], withoutspace[1], withoutspace[2], asig));
+        txtadoc.setText(docs.docConvalidacion(withoutspace[0], withoutspace[1], withoutspace[2], asig, withoutspace[3]));
     }
 
     //funcion que guarda el documento en una ruta elegida
